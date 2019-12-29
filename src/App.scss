@@ -1,0 +1,117 @@
+/* .layout-topbar {
+    background-color: #20272a;
+    display: block;
+    padding: 0;
+    height: 70px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.3);
+}
+
+.layout-sidebar {
+    position: fixed;
+    left: 0;
+    top: 70px;
+    height: calc(100% - 70px);
+    background-color: #fff;
+    width: 300px;
+    overflow: auto;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,.2);
+}
+
+.layout-content {
+    margin-left: 300px;
+    padding-top: 70px;
+} */
+
+.p-menu:not(.p-menu-dynamic) {
+	width: 100% !important;
+}
+
+.p-panelmenu-icon {
+	display: none !important;
+}
+
+.padding-top-s {
+	padding-top: 5px;
+}
+
+body .layout-wrapper {
+	.topbar {
+		padding: 10px 10px;
+		height: 60px;
+
+		display: flex;
+
+		.topbar-title {
+			flex: 1;
+			margin: auto;
+			color: white;
+			text-align: center;
+			text-transform: uppercase;
+		}
+
+		.p-menuitem-link {
+			min-height: 44px;
+			margin: auto;
+		}
+	}
+	.layout-menu-container {
+		top: 60px;
+	}
+	.layout-breadcrumb {
+		display: flex;
+		margin-top: 10px;
+
+		span {
+			flex: 1;
+		}
+		.layout-breadcrumb-date-label {
+			margin: auto;
+			text-align: end;
+			margin-right: 10px;
+		}
+
+		div.p-inputswitch {
+			height: 0.8em;
+			margin-left: 8px;
+		}
+
+		.p-calendar .p-calendar-button {
+			height: auto;
+		}
+	}
+}
+
+.margin-right-m {
+	margin-right: 4px;
+}
+
+ul.acc-feed-container {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+
+	li {
+		border-bottom: 1px solid #dddddd;
+		padding: 10px 15px;
+		width: 100%;
+	}
+}
+
+.dashboard-card {
+	div.p-panel-content {
+		padding: 0;
+	}
+}
+
+.flex-container {
+	display: flex;
+
+	div {
+		flex: 1;
+		margin: auto;
+	}
+}

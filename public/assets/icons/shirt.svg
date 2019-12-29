@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+<g>
+	<circle fill="#90DFAA" cx="256" cy="256" r="254"/>
+	<polygon fill="#FFFFFF" points="357.7,122.7 298.8,122.7 256,175.1 213.2,122.7 154.3,122.7 71.9,189.5 112.6,244.6 154.3,219.1    154.3,389.3 357.7,389.3 357.7,219.1 399.4,244.6 440.1,189.5  "/>
+	<path fill="#FF7058" d="M303.1,223c-10.2-18.1-32.9-23-47.1-8.1l0,0l0,0c-14.2-14.9-36.9-10.1-47.1,8.1c-5,8.9-5.9,17.7-5,23.5   c4.9,32.8,52.2,59.3,52.2,59.3s47.2-26.6,52.2-59.3C309,240.8,308.2,232,303.1,223z"/>
+</g>
+
+	<metadata>
+		<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+			<rdf:Description about="https://iconscout.com/legal#licenses" dc:title="" dc:description="" dc:publisher="Iconscout" dc:date="2017-07-28" dc:format="image/svg+xml" dc:language="en">
+				<dc:creator>
+					<rdf:Bag>
+						<rdf:li>Vectors Market</rdf:li>
+					</rdf:Bag>
+				</dc:creator>
+			</rdf:Description>
+		</rdf:RDF>
+    </metadata></svg>
