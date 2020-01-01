@@ -38,7 +38,7 @@ const AppTopbar = ({ setMenuState }: AppTopbarProps) => {
 						</IsMobile>
 						<IsDesktop>
 							<GoogleLogin
-								clientId="520164195929-3k4ime2o05tt9r003f01tiscl2ovger1.apps.googleusercontent.com"
+								clientId={process.env.GOOGLE_AUTH_SHIT}
 								render={(renderProps) => (
 									<Button
 										label="Log In"
