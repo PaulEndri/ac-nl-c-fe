@@ -4,6 +4,7 @@ import { Button } from 'primereact/button';
 import IsMobile from '../helpers/isMobile';
 import IsDesktop from '../helpers/isDesktop';
 
+import GoogleLogin from 'react-google-login';
 const MENU_ITEMS = [
 	{ label: 'Log In', icon: 'pi pi-power-off' },
 	{ label: 'Register', icon: 'pi pi-user-plus' },
@@ -13,7 +14,9 @@ const MENU_ITEMS = [
 interface AppTopbarProps {
 	setMenuState: Function;
 }
-
+const responseGoogle = (response) => {
+	console.log(response);
+};
 const AppTopbar = ({ setMenuState }: AppTopbarProps) => {
 	let menuRef: any = React.createRef();
 
@@ -34,8 +37,21 @@ const AppTopbar = ({ setMenuState }: AppTopbarProps) => {
 							<Button icon="fas fa-2x fa-ellipsis-v" onClick={(e) => menuRef.toggle(e)} />
 						</IsMobile>
 						<IsDesktop>
-							<Button label="Log In" icon="pi pi-power-off" />
-							<Button label="Register" icon="pi pi-user-plus" />
+							<GoogleLogin
+								clientId="520164195929-3k4ime2o05tt9r003f01tiscl2ovger1.apps.googleusercontent.com"
+								render={(renderProps) => (
+									<Button
+										label="Log In"
+										icon="pi pi-power-off"
+										onClick={renderProps.onClick}
+										disabled={renderProps.disabled}
+									/>
+								)}
+								buttonText="Login"
+								onSuccess={responseGoogle}
+								onFailure={responseGoogle}
+								cookiePolicy={'single_host_origin'}
+							/>
 							<Button label="About & Support" icon="pi pi-question" />
 						</IsDesktop>
 					</div>
