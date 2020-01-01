@@ -6,8 +6,9 @@ import { connect } from 'react-redux';
 import { getGlobalMenu } from '../../store/global/selectors';
 import classNames from 'classnames';
 import { IS_MOBILE } from '../helpers/isMobile';
-import { SetGlobalMenuAction } from '../../store/global/actions';
+import { setGlobalMenuAction } from '../../store/global/actions';
 import { push } from 'connected-react-router';
+import Modals from '../modals/';
 
 interface LayoutProps {
 	menuState: boolean;
@@ -21,7 +22,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
 	push,
-	setMenuState: SetGlobalMenuAction
+	setMenuState: setGlobalMenuAction
 };
 
 const Layout: React.FC<LayoutProps> = ({ children, menuState, setMenuState, push }) => (
@@ -40,6 +41,7 @@ const Layout: React.FC<LayoutProps> = ({ children, menuState, setMenuState, push
 				<div className="layout-content-container">{children}</div>
 			</div>
 		</div>
+		<Modals />
 	</div>
 );
 

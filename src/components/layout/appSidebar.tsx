@@ -28,7 +28,7 @@ const MENU_DATA: IMenu_Data[] = [
 		label: 'Fishes',
 		icon: 'pi pi-fw pi-plus',
 		items: [
-			{ label: 'All Villagers', path: '/villagers' },
+			{ label: 'All Villagers', path: '/fishes' },
 			{ label: 'My Villagers', path: '/villagers/town', disableCheck: true }
 		]
 	},

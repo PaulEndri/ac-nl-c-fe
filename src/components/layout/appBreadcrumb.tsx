@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import Header from './appTopbar';
-import AppSidebar from './appSidebar';
 import { Calendar } from 'primereact/calendar';
 import { connect } from 'react-redux';
 import { getGlobalDate } from '../../store/global/selectors';
-import { SetGlobalTimeAction } from '../../store/global/actions';
+import { setGlobalTimeAction } from '../../store/global/actions';
 import { InputSwitch } from 'primereact/inputswitch';
 import { IS_MOBILE } from '../helpers/isMobile';
 
@@ -18,7 +16,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-	setDate: SetGlobalTimeAction
+	setDate: setGlobalTimeAction
 };
 
 const AppBreadcrumb = ({ date, setDate }: AppBreadcrumbProps) => {

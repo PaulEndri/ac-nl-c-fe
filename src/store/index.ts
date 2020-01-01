@@ -1,5 +1,6 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import { globalReducer } from './global/reducer';
+import { modalReducer } from './modals/reducer';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 import thunk from 'redux-thunk';
@@ -7,6 +8,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 const generateRootReducer = (history) =>
 	combineReducers({
 		global: globalReducer,
+		modal: modalReducer,
 		router: connectRouter(history)
 	});
 
