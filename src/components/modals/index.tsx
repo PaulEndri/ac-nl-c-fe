@@ -33,7 +33,7 @@ const Modals = ({ modalKey, activeModal, setModal }: modalComponentProps) => (
 			dismissableMask={true}
 		>
 			{activeModal === MODAL_OPTIONS.Villager && <VillagerModal villagerName={modalKey} />}
-			{activeModal === MODAL_OPTIONS.Fish && <FishModal villagerName={modalKey} />}
+			{activeModal === MODAL_OPTIONS.Fish && <FishModal Name={modalKey} />}
 		</Dialog>
 	</div>
 );

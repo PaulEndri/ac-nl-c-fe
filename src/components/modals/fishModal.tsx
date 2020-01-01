@@ -95,42 +95,7 @@ const ICON_STYLES = {
 	marginTop: IS_MOBILE ? 'auto' : '50px'
 };
 const FishModal = ({ Name }: VillagerModalProps) => {
-	const villager = Villagers.find(({ Name }) => Name === villagerName);
-	if (!villager) {
-		return <div>Not Found</div>;
-	}
-
-	return (
-		<ScrollPanel style={{ width: '100%' }}>
-			<div className="p-grid p-justify-even">
-				<div className="p-col-12 p-md-4 text-align-center ">
-					<div className="acc-villager-icon" style={ICON_STYLES}>
-						<NatureIcon villager={Nam} size={IS_MOBILE ? 'small' : 'large'} />
-					</div>
-				</div>
-				<div className="p-col-12 p-md-7">
-					<TabView className="card">
-						<TabPanel header="Details">
-							&nbsp;
-							<CoreData villager={villager} />
-						</TabPanel>
-						<TabPanel header="Biography">
-							&nbsp;
-							<BiographyData villager={villager} />
-						</TabPanel>
-						<TabPanel header="Favorites">
-							&nbsp;
-							<FavoriteData villager={villager} />
-						</TabPanel>
-						<TabPanel header="Coffee">
-							&nbsp;
-							<CoffeeData villager={villager} />
-						</TabPanel>
-					</TabView>
-				</div>
-			</div>
-		</ScrollPanel>
-	);
+	return <span>{Name}</span>;
 };
 
 export default FishModal;
