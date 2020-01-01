@@ -4,12 +4,10 @@ import { InputText } from 'primereact/inputtext';
 import { getGlobalDate } from '../../store/global/selectors';
 import { DataView } from 'primereact/dataview';
 import { Dropdown } from 'primereact/dropdown';
-import { IS_MOBILE } from '../helpers/isMobile';
 import { Panel } from 'primereact/components/panel/Panel';
 import { setModal } from '../../store/modals/actions';
-import IItem from 'ac-nl-sdk/dist/interfaces/IItem';
 import VillagerIcon from '../villagerIcon';
-import IVillager from 'ac-nl-sdk/dist/interfaces/IVillager';
+import { IVillager, IItem } from 'ac-nl-sdk';
 import NatureIcon from '../natureIcon';
 
 const SORT_OPTIONS = [

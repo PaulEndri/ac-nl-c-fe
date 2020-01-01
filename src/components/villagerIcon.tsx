@@ -1,5 +1,5 @@
 import React from 'react';
-import IVillager from 'ac-nl-sdk/dist/interfaces/IVillager';
+import { IVillager } from 'ac-nl-sdk';
 
 interface VillagerIconProps {
 	villager: IVillager;

@@ -1,5 +1,5 @@
 import React from 'react';
-import INature from 'ac-nl-sdk/dist/interfaces/INature';
+import { INature } from 'ac-nl-sdk';
 import classNames from 'classnames';
 
 interface FeedNatureItemProps {

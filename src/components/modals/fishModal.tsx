@@ -1,8 +1,7 @@
 import React from 'react';
-import { Villagers } from 'ac-nl-sdk';
+import { Villagers, IVillager } from 'ac-nl-sdk';
 import VillagerIcon from '../villagerIcon';
 import IsMobile, { IS_MOBILE } from '../helpers/isMobile';
-import IVillager from 'ac-nl-sdk/dist/interfaces/IVillager';
 import IsDesktop from '../helpers/isDesktop';
 import { ScrollPanel } from 'primereact/scrollpanel';
 import { TabView, TabPanel } from 'primereact/tabview';
