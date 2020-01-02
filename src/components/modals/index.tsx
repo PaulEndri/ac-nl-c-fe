@@ -8,6 +8,7 @@ import { getModalKey, getModalActive } from '../../store/modals/selectors';
 import { MODAL_OPTIONS } from '../../store/modals/reducer';
 import VillagerModal from './villagerModal';
 import FishModal from './fishModal';
+import UserModal from './userModal';
 
 interface modalComponentProps {
 	activeModal: MODAL_OPTIONS;
@@ -27,13 +28,14 @@ const Modals = ({ modalKey, activeModal, setModal }: modalComponentProps) => (
 	<div>
 		<Dialog
 			header={modalKey}
-			className={classNames('acc-view-width', { mobile: IS_MOBILE })}
+			className={classNames({ mobile: IS_MOBILE, 'acc-view-width': activeModal !== MODAL_OPTIONS.User })}
 			visible={!!activeModal}
 			onHide={() => setModal(null, null)}
 			dismissableMask={true}
 		>
 			{activeModal === MODAL_OPTIONS.Villager && <VillagerModal villagerName={modalKey} />}
 			{activeModal === MODAL_OPTIONS.Fish && <FishModal Name={modalKey} />}
+			{activeModal === MODAL_OPTIONS.User && <UserModal />}
 		</Dialog>
 	</div>
 );

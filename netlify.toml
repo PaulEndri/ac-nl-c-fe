@@ -1,0 +1,10 @@
+[build]
+  command = "npm install && npm run build"
+  functions = "dist-lambda"
+
+[dev]
+    command = "node dist"
+    port = 8010
+    functionPort = "34567"
+    targetPort = 8010
+    autoLaunch = true
