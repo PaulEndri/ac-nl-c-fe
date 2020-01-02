@@ -1,5 +1,5 @@
 import { createReducer } from 'typesafe-actions';
-import { setUserLoggedInStatus } from './actions';
+import { setUserLoggedInStatus, setUserData } from './actions';
 import { IPlayer } from '../../lambdas/app/interfaces/IPlayer';
 
 export interface IUserState extends IPlayer {
@@ -7,6 +7,7 @@ export interface IUserState extends IPlayer {
 }
 
 export const initialUserState: IUserState = {
+	Email: '',
 	GoogleId: '',
 	Name: '',
 	NewHorizons: null,
@@ -19,6 +20,8 @@ const genericAction = (state, action) => ({
 	...action.payload
 });
 
-export const userReducer = createReducer(initialUserState).handleAction(setUserLoggedInStatus, genericAction);
+export const userReducer = createReducer(initialUserState)
+	.handleAction(setUserLoggedInStatus, genericAction)
+	.handleAction(setUserData, genericAction);
 
 export type UserState = ReturnType<typeof userReducer>;

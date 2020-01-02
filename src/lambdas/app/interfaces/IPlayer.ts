@@ -25,6 +25,7 @@ export interface ISaveData {
 export interface IPlayer {
 	GoogleId: string;
 	Name: string;
+	Email: string;
 	NewLeaf: ISaveData;
 	NewHorizons: ISaveData;
 }

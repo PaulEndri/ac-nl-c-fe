@@ -2,10 +2,37 @@ import React, { useState } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { connect } from 'react-redux';
 import { Button } from 'primereact/button';
+import ApiService from '../../service/api';
+import { getUserGoogleId, getUserEmail } from '../../store/user/selectors';
+import { setUserData } from '../../store/user/actions';
+import { setModal } from '../../store/modals/actions';
 
-const UserModalComponent = () => {
+interface Props {
+	email: string;
+	googleId: string;
+	setUserData: Function;
+}
+
+const mapStateToProps = (state) => ({
+	googleId: getUserGoogleId(state),
+	email: getUserEmail(state)
+});
+
+const mapDispatchToProps = {
+	setUserData,
+	setModal
+};
+
+const UserModalComponent = ({ googleId, email, setUserData }: Props) => {
 	const [ town, setTown ] = useState('');
 	const [ name, setName ] = useState('');
+
+	const submit = async () => {
+		const test = await ApiService.createPlayer(googleId, email, town, name);
+
+		setUserData(test);
+		setModal(null, null);
+	};
 
 	return (
 		<div className="user-registration-modal p-grid">
@@ -21,11 +48,11 @@ const UserModalComponent = () => {
 					<label htmlFor="townName">Town Name</label>
 				</span>
 			</div>
-			<Button className="p-col-12" label="Submit" />
+			<Button className="p-col-12" label="Submit" disabled={!name || !town} onClick={submit} />
 		</div>
 	);
 };
 
-export const UserModal = connect(null, null)(UserModalComponent);
+export const UserModal = connect(mapStateToProps, mapDispatchToProps)(UserModalComponent);
 
 export default UserModal;

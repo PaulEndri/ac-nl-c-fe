@@ -3,8 +3,8 @@
   functions = "dist-lambda"
 
 [dev]
-    command = "node dist"
-    port = 8010
+    command = "npm start"
+    port = 3000
     functionPort = "34567"
-    targetPort = 8010
+    targetPort = 3000
     autoLaunch = true

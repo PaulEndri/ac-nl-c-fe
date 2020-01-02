@@ -5,10 +5,13 @@ import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { userReducer } from './user/reducer';
+
 const generateRootReducer = (history) =>
 	combineReducers({
 		global: globalReducer,
 		modal: modalReducer,
+		user: userReducer,
 		router: connectRouter(history)
 	});
 

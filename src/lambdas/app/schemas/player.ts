@@ -29,6 +29,7 @@ export const PlayerSchema: Schema = new Schema({
 		unique: true
 	},
 	Name: Types.String,
+	Email: Types.String,
 	NewLeaf: SaveDataSchema,
 	NewHorizons: SaveDataSchema
 });

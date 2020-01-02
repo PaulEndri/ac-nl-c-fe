@@ -1,4 +1,6 @@
 export const getUserLoggedInStatus = (state) => state.user.isLoggedIn;
+export const getUserEmail = (state) => state.user.Email;
+export const getUserGoogleId = (state) => state.user.GoogleId;
 export const getUserData = (state) => ({
 	Name: state.user.Name,
 	TownName: state.user.TownName,
