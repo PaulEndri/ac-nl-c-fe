@@ -28,7 +28,7 @@ const Modals = ({ modalKey, activeModal, setModal }: modalComponentProps) => (
 	<div>
 		<Dialog
 			header={modalKey}
-			className={classNames({ mobile: IS_MOBILE, 'acc-view-width': activeModal !== MODAL_OPTIONS.User })}
+			className={classNames({ mobile: IS_MOBILE, 'acc-view-width': activeModal === MODAL_OPTIONS.Villager })}
 			visible={!!activeModal}
 			onHide={() => setModal(null, null)}
 			dismissableMask={true}

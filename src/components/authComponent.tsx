@@ -73,16 +73,15 @@ class AuthComponent extends React.Component<AuthProps, AuthState> {
 
 	render() {
 		const { LoginButton, LogoutButton, isLoggedIn } = this.props;
-
+		const clientId =
+			process.env.REACT_APP_GOOGLE_AUTH_SHIT ||
+			'520164195929-opv419vm5n0cg5pkodvqbck998qk5e96.apps.googleusercontent.com';
 		return (
 			<React.Fragment>
 				{this.state.error}
 				{!isLoggedIn && (
 					<GoogleLogin
-						clientId={
-							process.env.GOOGLE_AUTH_SHIT ||
-							'520164195929-opv419vm5n0cg5pkodvqbck998qk5e96.apps.googleusercontent.com'
-						}
+						clientId={clientId}
 						render={LoginButton}
 						buttonText="test"
 						scope="email"
@@ -93,10 +92,7 @@ class AuthComponent extends React.Component<AuthProps, AuthState> {
 				)}
 				{isLoggedIn && (
 					<GoogleLogout
-						clientId={
-							process.env.GOOGLE_AUTH_SHIT ||
-							'520164195929-opv419vm5n0cg5pkodvqbck998qk5e96.apps.googleusercontent.com'
-						}
+						clientId={clientId}
 						render={LogoutButton}
 						buttonText="Logout"
 						onLogoutSuccess={() => this.handleGoogleLogout}
