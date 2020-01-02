@@ -19,9 +19,9 @@ const controller = new PlayerController();
 // Only three routes, we can handle it for now.
 router
 	.get('/', (ctx) => (ctx.body = 'HELLO'))
-	.get('/player/:googleId', controller.get)
+	.get('/player/:email', controller.get)
 	.post('/player', controller.create)
-	.put('/player/:googleId', controller.update);
+	.put('/player/:email', controller.update);
 
 app.use(bodyParser());
 app.use(router.routes());
