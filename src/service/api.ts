@@ -10,6 +10,9 @@ export class ApiService {
 	static async updatePlayer(googleId: string, data: IPlayerModel): Promise<IPlayerModel> {
 		return await fetch(`${ApiService.BASE_URL}/${googleId}`, {
 			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json'
+			},
 			body: JSON.stringify(data)
 		}).then((res) => res.json());
 	}
@@ -22,6 +25,9 @@ export class ApiService {
 	): Promise<IPlayerModel> {
 		return await fetch(`${ApiService.BASE_URL}`, {
 			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
 			body: JSON.stringify({
 				playerName,
 				email,
