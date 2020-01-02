@@ -27,5 +27,4 @@ export interface IPlayer {
 	Name: string;
 	Email: string;
 	NewLeaf: ISaveData;
-	NewHorizons: ISaveData;
 }

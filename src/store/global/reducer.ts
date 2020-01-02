@@ -1,19 +1,19 @@
 import { createReducer } from 'typesafe-actions';
-import { setGlobalTimeAction, setGlobalMenuAction } from './actions';
+import { setGlobalTimeAction, setGlobalMenuAction, setGlobalSavePending } from './actions';
 import { IS_DESKTOP } from '../../components/helpers/isDesktop';
 
 export interface IGlobalState {
 	readonly activeVillagerIndex: number;
-	readonly date: string;
+	readonly date: Date;
 	readonly menuState: boolean;
-	readonly user: any;
+	readonly saving: boolean;
 }
 
 export const initialGlobalState: IGlobalState = {
 	activeVillagerIndex: undefined,
-	date: new Date().toString(),
+	date: new Date(),
 	menuState: IS_DESKTOP,
-	user: null
+	saving: false
 };
 
 const genericAction = (state, action) => ({
@@ -23,6 +23,7 @@ const genericAction = (state, action) => ({
 
 export const globalReducer = createReducer(initialGlobalState)
 	.handleAction(setGlobalTimeAction, genericAction)
-	.handleAction(setGlobalMenuAction, genericAction);
+	.handleAction(setGlobalMenuAction, genericAction)
+	.handleAction(setGlobalSavePending, genericAction);
 
 export type GlobalState = ReturnType<typeof globalReducer>;

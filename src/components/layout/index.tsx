@@ -8,16 +8,8 @@ import { IS_MOBILE } from '../helpers/isMobile';
 import { setGlobalMenuAction } from '../../store/global/actions';
 import { push } from 'connected-react-router';
 import Modals from '../modals/';
-import { AppMenu } from './deprecated/appMenu';
+import { AppMenu } from './appMenu';
 import ClickOutside from '../helpers/clickOutside';
-
-interface IMenu_Data {
-	label: string;
-	disableCheck?: boolean;
-	icon?: string;
-	path?: string;
-	items?: IMenu_Data[];
-}
 
 interface LayoutProps {
 	menuState: boolean;
@@ -44,35 +36,44 @@ const Layout: React.FC<LayoutProps> = ({ children, menuState, setMenuState, push
 			label: 'Villagers',
 			items: [
 				{ label: 'All Villagers', command: () => push('/villagers') },
-				{ label: 'My Villagers', command: () => push('/villagers'), requiresLogin: true }
+				{ label: 'My Villagers', command: () => push('/villagers/town'), requiresLogin: true }
 			]
 		},
 		{
-			label: 'Fishes',
+			label: 'Nature',
 			items: [
-				{ label: 'All Fishes', command: () => push('/fishes') },
-				{ label: 'My Fishes', path: '/villagers/town', requiresLogin: true }
+				{ label: 'Fishes', command: () => push('/fishes') },
+				{ label: 'Bugs', command: () => push('/bugs') }
 			]
 		},
 		{
-			label: 'Bugs',
+			label: 'Museum',
 			items: [
-				{ label: 'All Villagers', path: '/villagers' },
-				{ label: 'My Villagers', path: '/villagers/town', requiresLogin: true }
-			]
-		},
-		{
-			label: 'Fossils',
-			items: [
-				{ label: 'All Villagers', path: '/villagers' },
-				{ label: 'My Villagers', path: '/villagers/town', disableCheck: true }
+				{ label: 'Fossils', command: () => push('/fossils') },
+				{ label: 'Art', command: () => push('/art') }
 			]
 		},
 		{
 			label: 'Clothing',
 			items: [
-				{ label: 'Tops', path: '/villagers' },
-				{ label: 'My Villagers', path: '/villagers/town', disableCheck: true }
+				{ label: 'Tops', command: () => push('/clothing?type=Tops') },
+				{ label: 'Bottoms', command: () => push('/clothing?type=Bottoms') },
+				{ label: 'Headwear', command: () => push('/clothing?type=Hats') },
+				{ label: 'Shoes', command: () => push('/clothing?type=Footwear') },
+				{ label: 'Dresses', command: () => push('/clothing?type=Dresses') },
+				{ label: 'Umbrellas', command: () => push('/clothing?type=Umbrellas') },
+				{ label: 'Accessories', command: () => push('/clothing?type=Accessories') },
+				{ label: 'View all', command: () => push('/clothing') }
+			]
+		},
+		{
+			label: 'Furniture & More',
+			items: [
+				{ label: 'Furniture', command: () => push('/furniture') },
+				{ label: 'Wallpaper', command: () => push('/wallpaper') },
+				{ label: 'Flooring', command: () => push('/flooring') },
+				{ label: 'Gyroids', command: () => push('/gyroids') },
+				{ label: 'Paper', command: () => push('/paper') }
 			]
 		}
 	];
@@ -82,9 +83,10 @@ const Layout: React.FC<LayoutProps> = ({ children, menuState, setMenuState, push
 			<div>
 				<AppTopbar setMenuState={() => setMenuState(!menuState)} />
 				<ClickOutside clickOutside={() => (IS_MOBILE && menuState ? setMenuState(false) : null)}>
-					<AppMenu model={menuData} />
+					<AppMenu model={menuData} push={push} />
 				</ClickOutside>
 				<div className="layout-content">
+					<div className="layout-overlay" />
 					<AppBreadcrumb />
 					<div className="layout-content-container">{children}</div>
 				</div>

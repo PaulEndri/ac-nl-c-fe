@@ -3,25 +3,26 @@ import { Players } from '../models/players';
 
 export class PlayerController {
 	async get(ctx: Context) {
-		const { googleId } = ctx.params;
+		const { email } = ctx.params;
 
 		const results = await Players.findOne({
-			GoogleId: googleId
+			Email: email
 		});
 
 		if (results) {
 			ctx.body = results.toObject();
 		} else {
-			ctx.throw(404, `User with ID ${googleId} not found`);
+			ctx.throw(404, `User with ID ${email} not found`);
 		}
 	}
 
 	async create(ctx: Context) {
-		const { playerName, townName, googleId } = ctx.request.body;
+		const { playerName, townName, googleId, email } = ctx.request.body;
 
 		const data = {
 			GoogleId: googleId,
 			Name: playerName,
+			Email: email,
 			NewLeaf: {
 				TownName: townName,
 				Villagers: [],
@@ -32,25 +33,13 @@ export class PlayerController {
 					Fossils: []
 				},
 				Catalogued: {
-					Furniture: [],
-					Clothing: [],
-					Fishes: [],
-					Bugs: [],
-					Art: [],
-					Fossils: []
-				}
-			},
-			NewHorizons: {
-				TownName: townName,
-				Villagers: [],
-				Museum: {
-					Fishes: [],
-					Bugs: [],
-					Art: [],
-					Fossils: []
-				},
-				Catalogued: {
-					Furniture: [],
+					Furniture: {
+						Furniture: [],
+						Wallpapers: [],
+						Flooring: [],
+						Paper: [],
+						Gyroids: []
+					},
 					Clothing: [],
 					Fishes: [],
 					Bugs: [],
@@ -70,16 +59,16 @@ export class PlayerController {
 	}
 
 	async update(ctx: Context) {
-		const { googleId } = ctx.params;
+		const { email } = ctx.params;
 
 		const results = await Players.findOne({
-			GoogleId: googleId
+			Email: email
 		});
 
 		if (results) {
 			ctx.body = await results.update(ctx.request.body);
 		} else {
-			ctx.throw(400, `User with ID ${googleId} not found`);
+			ctx.throw(400, `User with ID ${email} not found`);
 		}
 	}
 }

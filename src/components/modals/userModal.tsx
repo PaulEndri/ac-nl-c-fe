@@ -11,6 +11,7 @@ interface Props {
 	email: string;
 	googleId: string;
 	setUserData: Function;
+	setModal: Function;
 }
 
 const mapStateToProps = (state) => ({
@@ -23,14 +24,18 @@ const mapDispatchToProps = {
 	setModal
 };
 
-const UserModalComponent = ({ googleId, email, setUserData }: Props) => {
+const UserModalComponent = ({ googleId, email, setUserData, setModal }: Props) => {
 	const [ town, setTown ] = useState('');
 	const [ name, setName ] = useState('');
 
 	const submit = async () => {
-		const test = await ApiService.createPlayer(googleId, email, town, name);
+		try {
+			const test = await ApiService.createPlayer(googleId, email, town, name);
+			setUserData(test);
+		} catch (e) {
+			console.error(e);
+		}
 
-		setUserData(test);
 		setModal(null, null);
 	};
 
@@ -55,4 +60,7 @@ const UserModalComponent = ({ googleId, email, setUserData }: Props) => {
 
 export const UserModal = connect(mapStateToProps, mapDispatchToProps)(UserModalComponent);
 
-export default UserModal;
+export default {
+	Component: UserModal,
+	Footer: null
+};

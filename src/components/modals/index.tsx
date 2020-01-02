@@ -6,7 +6,7 @@ import { IS_MOBILE } from '../helpers/isMobile';
 import classNames from 'classnames';
 import { getModalKey, getModalActive } from '../../store/modals/selectors';
 import { MODAL_OPTIONS } from '../../store/modals/reducer';
-import VillagerModal from './villagerModal';
+import VillagerModal from './villager';
 import FishModal from './fishModal';
 import UserModal from './userModal';
 
@@ -24,6 +24,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
 	setModal
 };
+
 const Modals = ({ modalKey, activeModal, setModal }: modalComponentProps) => (
 	<div>
 		<Dialog
@@ -32,10 +33,16 @@ const Modals = ({ modalKey, activeModal, setModal }: modalComponentProps) => (
 			visible={!!activeModal}
 			onHide={() => setModal(null, null)}
 			dismissableMask={true}
+			footer={
+				<React.Fragment>
+					{activeModal === MODAL_OPTIONS.User && <UserModal.Footer />}
+					{activeModal === MODAL_OPTIONS.Villager && <VillagerModal.Footer name={modalKey} />}
+				</React.Fragment>
+			}
 		>
-			{activeModal === MODAL_OPTIONS.Villager && <VillagerModal villagerName={modalKey} />}
+			{activeModal === MODAL_OPTIONS.Villager && <VillagerModal.Component villagerName={modalKey} />}
 			{activeModal === MODAL_OPTIONS.Fish && <FishModal Name={modalKey} />}
-			{activeModal === MODAL_OPTIONS.User && <UserModal />}
+			{activeModal === MODAL_OPTIONS.User && <UserModal.Component />}
 		</Dialog>
 	</div>
 );

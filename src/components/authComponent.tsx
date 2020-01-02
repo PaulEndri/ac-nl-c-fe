@@ -1,5 +1,5 @@
 import React from 'react';
-import { GoogleLogin, GoogleLogout, GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
+import { GoogleLogin, GoogleLogout, GoogleLoginResponse } from 'react-google-login';
 import { connect } from 'react-redux';
 import { setModal } from '../store/modals/actions';
 import { MODAL_OPTIONS } from '../store/modals/reducer';
@@ -31,10 +31,24 @@ const mapDispatchToProps = {
 	setModal
 };
 
+const AUTH_COOKIE = 'ACC_LEAF_LOGIN_RECORD';
+
 class AuthComponent extends React.Component<AuthProps, AuthState> {
 	state = {
 		error: null
 	};
+
+	componentDidMount() {
+		const authCookie = document.cookie.split(';').find((c) => c.indexOf(AUTH_COOKIE) >= 0);
+
+		if (authCookie) {
+			const authCookieValue = authCookie.split('=')[1];
+
+			return this.fetchData(authCookieValue)
+				.then(() => console.log('Cookie Login Successfull'))
+				.catch((e) => console.error('Bad Value In Cookie'));
+		}
+	}
 
 	handleGoogleError({ error }: GoogleError) {
 		console.log(error);
@@ -42,31 +56,34 @@ class AuthComponent extends React.Component<AuthProps, AuthState> {
 	}
 
 	handleGoogleLogout() {
+		document.cookie = `${AUTH_COOKIE}=;expires=${new Date(0)}`;
 		this.props.setUserData({
 			Email: '',
 			GoogleId: '',
 			Name: '',
-			NewLeaf: null,
+			NewLeaf: {},
 			isLoggedIn: false
 		});
 	}
 
-	async handleGoogleLogin({ profileObj }: GoogleLoginResponse) {
+	async handleGoogleLogin({ profileObj, ...rest }: GoogleLoginResponse) {
 		const { googleId, email } = profileObj;
-
 		try {
-			await this.fetchData(googleId, email);
+			await this.fetchData(email);
+
+			document.cookie = `${AUTH_COOKIE}=${email}`;
 		} catch (e) {
 			this.props.setUserData({ Email: email, GoogleId: googleId });
 			this.props.setModal(MODAL_OPTIONS.User, email);
 		}
 	}
 
-	async fetchData(googleId: string, email: string) {
-		const data = await ApiService.getPlayer(googleId);
+	async fetchData(email: string) {
+		const data = await ApiService.getPlayer(email);
 
 		this.props.setUserData({
 			...data,
+			Email: email,
 			isLoggedIn: true
 		});
 	}
@@ -95,7 +112,7 @@ class AuthComponent extends React.Component<AuthProps, AuthState> {
 						clientId={clientId}
 						render={LogoutButton}
 						buttonText="Logout"
-						onLogoutSuccess={() => this.handleGoogleLogout}
+						onLogoutSuccess={() => this.handleGoogleLogout()}
 					/>
 				)}
 			</React.Fragment>

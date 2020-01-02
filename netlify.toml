@@ -8,3 +8,8 @@
     functionPort = "34567"
     targetPort = 3000
     autoLaunch = true
+
+[[headers]]
+  for="/*"
+    [headers.values]
+    Access-Control-Allow-Origin = "*"

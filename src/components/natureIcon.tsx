@@ -15,6 +15,7 @@ const SIZES = {
 
 export const NatureIcon = ({ Name, Type, Size = 'Regular', className }: NatureIconProps) => (
 	<img
+		alt={Name}
 		className={classNames(`acc-nature-icon ${Type}`, { [className]: className })}
 		src={`/assets/${Type}/${Name}.png`}
 		style={{ height: SIZES[Size], width: SIZES[Size] }}

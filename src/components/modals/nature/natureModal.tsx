@@ -1,8 +1,8 @@
 import React from 'react';
 import { Fishes } from 'ac-nl-sdk';
-import NatureIcon from '../natureIcon';
+import NatureIcon from '../../natureIcon';
 import { Panel } from 'primereact/components/panel/Panel';
-
+import VillagerIcon from '../../villagerIcon';
 interface FishModalProps {
 	Name: string;
 }

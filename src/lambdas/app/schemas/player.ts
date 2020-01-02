@@ -14,7 +14,13 @@ export const SaveDataSchema = new Schema({
 		Fossils: [ Types.String ]
 	},
 	Catalogued: {
-		Furniture: [ Types.String ],
+		Furniture: {
+			Furniture: [ Types.String ],
+			Gyroids: [ Types.String ],
+			Wallpapers: [ Types.String ],
+			Flooring: [ Types.String ],
+			Paper: [ Types.String ]
+		},
 		Clothing: [ Types.String ],
 		Fishes: [ Types.String ],
 		Bugs: [ Types.String ],
@@ -30,6 +36,5 @@ export const PlayerSchema: Schema = new Schema({
 	},
 	Name: Types.String,
 	Email: Types.String,
-	NewLeaf: SaveDataSchema,
-	NewHorizons: SaveDataSchema
+	NewLeaf: SaveDataSchema
 });

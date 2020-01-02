@@ -1,8 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { CalenderService } from 'ac-nl-sdk';
 import { Panel } from 'primereact/components/panel/Panel';
-import { Feed, FeedItem, FeedNatureItem } from '../../components/feed';
+import { Feed, FeedItem } from '../../components/feed';
 import { getGlobalDate } from '../../store/global/selectors';
 import { setModal } from '../../store/modals/actions';
 import NatureIcon from '../../components/natureIcon';
@@ -23,12 +23,33 @@ const mapDispatchToProps = {
 	setModal
 };
 
+interface DashboardNaturePanelProps {
+	iconKey: 'bug' | 'fish';
+	modal: MODAL_OPTIONS;
+	title: string;
+	data: any[];
+}
+const DashboardNaturePanel = ({ title, iconKey, data, modal }: DashboardNaturePanelProps) => {
+	const dispatch = useDispatch();
+
+	return (
+		<Panel header={title} toggleable={IS_MOBILE} className="dashboard-card card p-col-12 p-md-4 p-lg-3">
+			<Feed>
+				{data.map((f) => (
+					<FeedItem key={f.Name} onClick={() => dispatch(setModal(modal, f.Name))}>
+						<NatureIcon Type={iconKey} Name={f.Name} Size="Small" />
+						<div>{f.Name}</div>
+					</FeedItem>
+				))}
+			</Feed>
+		</Panel>
+	);
+};
 const Dashboard = ({ date, setModal }: DashboardProps) => {
 	const service = new CalenderService(date);
 	const { Bugs, Fishes, Villagers, Events } = service.getAll(true);
 	const cardClasses = 'dashboard-card card p-col-12';
 
-	// p-col-5 p-md-3 p-lg-2
 	return (
 		<div className="p-grid p-justify-even">
 			<div className="p-col-12 p-md-3 p-lg-3">
@@ -50,26 +71,18 @@ const Dashboard = ({ date, setModal }: DashboardProps) => {
 					</Panel>
 				</div>
 			</div>
-			<Panel header="Today's Fishes" toggleable={IS_MOBILE} className={`${cardClasses} p-md-3 p-lg-4`}>
-				<Feed>
-					{Fishes.map((f) => (
-						<FeedItem key={f.Name} onClick={() => setModal(MODAL_OPTIONS.Fish, f.Name)}>
-							<NatureIcon Type="fish" Name={f.Name} Size="Small" />
-							<div>{f.Name}</div>
-						</FeedItem>
-					))}
-				</Feed>
-			</Panel>
-			<Panel header="Today's Bugs" toggleable={IS_MOBILE} className={`${cardClasses} p-md-3 p-lg-4`}>
-				<Feed>
-					{Bugs.map((f) => (
-						<FeedItem key={f.Name}>
-							<NatureIcon Type="bug" Name={f.Name} Size="Small" />
-							<div>{f.Name}</div>
-						</FeedItem>
-					))}
-				</Feed>
-			</Panel>
+			<DashboardNaturePanel
+				title="Today's Mainland Fishes"
+				data={Fishes.filter((f) => f.Location !== 'Island')}
+				iconKey="fish"
+				modal={MODAL_OPTIONS.Fish}
+			/>
+			<DashboardNaturePanel
+				title="Today's Mainland Bugs"
+				data={Bugs.filter((b) => b.Location.indexOf('Island') < 0)}
+				iconKey="bug"
+				modal={MODAL_OPTIONS.Bug}
+			/>
 		</div>
 	);
 };

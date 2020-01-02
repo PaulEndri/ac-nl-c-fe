@@ -9,13 +9,17 @@ interface Props {
  */
 export const ClickOutside: React.FC<Props> = ({ clickOutside, children }) => {
 	const wrapperRef = useRef(null);
-
+	const clickHandler = (e) => {
+		if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
+			clickOutside(e);
+		}
+	};
 	useEffect(() => {
 		// Bind the event listener
-		document.addEventListener('mousedown', clickOutside);
+		document.addEventListener('mousedown', clickHandler);
 		return () => {
 			// Unbind the event listener on clean up
-			document.removeEventListener('mousedown', clickOutside);
+			document.removeEventListener('mousedown', clickHandler);
 		};
 	});
 

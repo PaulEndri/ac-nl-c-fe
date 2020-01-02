@@ -15,6 +15,7 @@ const SIZES = {
 export const VillagerIcon = ({ villager, size = 'large', className }: VillagerIconProps) => (
 	<img
 		className={className}
+		alt={villager.Name}
 		src={`/assets/villagers/${villager.Name}.png`}
 		style={{ height: SIZES[size], width: 'auto' }}
 	/>

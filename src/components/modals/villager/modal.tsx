@@ -1,9 +1,9 @@
 import React from 'react';
 import { Villagers, IVillager } from 'ac-nl-sdk';
-import VillagerIcon from '../villagerIcon';
-import { IS_MOBILE } from '../helpers/isMobile';
-import { ScrollPanel } from 'primereact/scrollpanel';
+import VillagerIcon from '../../villagerIcon';
+import { IS_MOBILE } from '../../helpers/isMobile';
 import { TabView, TabPanel } from 'primereact/tabview';
+
 interface VillagerModalProps {
 	villagerName: string;
 }
@@ -89,42 +89,40 @@ const ICON_STYLES = {
 	height: IS_MOBILE ? '150px' : '270px',
 	paddingTop: '15px'
 };
-const VillagerModal = ({ villagerName }: VillagerModalProps) => {
+export const VillagerModal = ({ villagerName }: VillagerModalProps) => {
 	const villager = Villagers.find(({ Name }) => Name === villagerName);
 	if (!villager) {
 		return <div>Not Found</div>;
 	}
 
 	return (
-		<ScrollPanel style={{ width: '100%' }}>
-			<div className="p-grid p-justify-even">
-				<div className="p-col-12 p-md-4 text-align-center ">
-					<div className="acc-villager-icon" style={ICON_STYLES}>
-						<VillagerIcon villager={villager} size={IS_MOBILE ? 'small' : 'large'} />
-					</div>
-				</div>
-				<div className="p-col-12 p-md-7">
-					<TabView className="card">
-						<TabPanel header="Details">
-							&nbsp;
-							<CoreData villager={villager} />
-						</TabPanel>
-						<TabPanel header="Biography">
-							&nbsp;
-							<BiographyData villager={villager} />
-						</TabPanel>
-						<TabPanel header="Favorites">
-							&nbsp;
-							<FavoriteData villager={villager} />
-						</TabPanel>
-						<TabPanel header="Coffee">
-							&nbsp;
-							<CoffeeData villager={villager} />
-						</TabPanel>
-					</TabView>
+		<div className="p-grid p-justify-even">
+			<div className="p-col-12 p-md-4 text-align-center ">
+				<div className="acc-villager-icon" style={ICON_STYLES}>
+					<VillagerIcon villager={villager} size={IS_MOBILE ? 'small' : 'large'} />
 				</div>
 			</div>
-		</ScrollPanel>
+			<div className="p-col-12 p-md-7">
+				<TabView className="card">
+					<TabPanel header="Details">
+						&nbsp;
+						<CoreData villager={villager} />
+					</TabPanel>
+					<TabPanel header="Biography">
+						&nbsp;
+						<BiographyData villager={villager} />
+					</TabPanel>
+					<TabPanel header="Favorites">
+						&nbsp;
+						<FavoriteData villager={villager} />
+					</TabPanel>
+					<TabPanel header="Coffee">
+						&nbsp;
+						<CoffeeData villager={villager} />
+					</TabPanel>
+				</TabView>
+			</div>
+		</div>
 	);
 };
 

@@ -9,6 +9,7 @@ import { setModal } from '../../store/modals/actions';
 import VillagerIcon from '../villagerIcon';
 import { IVillager, IItem } from 'ac-nl-sdk';
 import NatureIcon from '../natureIcon';
+import { MODAL_OPTIONS } from '../../store/modals/reducer';
 
 const SORT_OPTIONS = [
 	{ label: 'Name', value: 'Name' },
@@ -59,7 +60,7 @@ const EntityList = ({ data, dataType, title, setModal }: EntityListProps) => {
 		data && (
 			<span
 				className="p-col-4 p-md-1"
-				onClick={() => setModal(dataType, data.Name)}
+				onClick={() => setModal(dataType === 'fish' ? MODAL_OPTIONS.Fish : MODAL_OPTIONS.Bug, data.Name)}
 				style={{
 					margin: 'auto',
 					display: 'block',
@@ -67,7 +68,12 @@ const EntityList = ({ data, dataType, title, setModal }: EntityListProps) => {
 					paddingTop: '16px'
 				}}
 			>
-				<NatureIcon className="acc-selectable" Type={'fish'} Size="Regular" Name={data.Name} />
+				<NatureIcon
+					className="acc-selectable"
+					Type={dataType === 'fish' ? 'fish' : 'bug'}
+					Size="Regular"
+					Name={data.Name}
+				/>
 			</span>
 		);
 

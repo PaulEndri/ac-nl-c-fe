@@ -34,7 +34,11 @@ export const FeedNatureItem = ({ item, type }: FeedNatureItemProps) => (
 	<FeedItem>
 		<div className="acc-feed-nature-item ">
 			<span className="acc-feed-icon">
-				<img src={`/assets/${type}/${item.Name}.png`} style={{ height: '36px', width: '36px' }} />
+				<img
+					alt={item.Name}
+					src={`/assets/${type}/${item.Name}.png`}
+					style={{ height: '36px', width: '36px' }}
+				/>
 			</span>
 			<div>{item.Name}</div>
 		</div>

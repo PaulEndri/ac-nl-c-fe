@@ -5,6 +5,7 @@ import IsDesktop from '../helpers/isDesktop';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import Auth from '../authComponent';
+import { LightingSwitch } from '../lightingSwitch';
 
 interface AppTopbarProps {
 	setMenuState: Function;
@@ -27,7 +28,7 @@ const AppTopbarComponent = ({ setMenuState, push }: AppTopbarProps) => {
 					</IsMobile>
 					<IsDesktop>
 						<div className="acnl-logo" onClick={logoClick}>
-							<img style={{ height: '40px' }} src="/assets/leaf2.png" />
+							<img alt="logo" style={{ height: '40px' }} src="/assets/leaf2.png" />
 						</div>
 					</IsDesktop>
 					<h1 className="topbar-title">AC:NL Companion</h1>
@@ -44,19 +45,21 @@ const AppTopbarComponent = ({ setMenuState, push }: AppTopbarProps) => {
 								)}
 								LogoutButton={(renderProps) => (
 									<Button
-										label="Log In"
+										label="Log Out"
 										icon="pi pi-power-off"
+										className="logout-button"
 										onClick={renderProps.onClick}
 										disabled={renderProps.disabled}
 									/>
 								)}
 							/>
+							<LightingSwitch />
 							<Button label="About & Support" icon="pi pi-question" />
 						</IsDesktop>
 					</div>
 					<IsMobile>
 						<div className="acnl-logo" onClick={logoClick}>
-							<img style={{ height: '40px' }} src="/assets/leaf2.png" />
+							<img alt="logo" style={{ height: '40px' }} src="/assets/leaf2.png" />
 						</div>
 					</IsMobile>
 				</div>

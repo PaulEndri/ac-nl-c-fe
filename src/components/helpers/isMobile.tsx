@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 
 interface Props {
 	children: any;
@@ -6,6 +6,6 @@ interface Props {
 
 export const IS_MOBILE = window.innerWidth <= 1024;
 
-const IsMobile: FunctionComponent<Props> = ({ children }) => (IS_MOBILE ? children : null);
+const IsMobile: React.FC<Props> = ({ children }) => (IS_MOBILE ? children : null);
 
 export default IsMobile;

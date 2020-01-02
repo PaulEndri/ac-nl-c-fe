@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { Sidebar } from 'primereact/sidebar';
 import { PanelMenu } from 'primereact/panelmenu';
 
