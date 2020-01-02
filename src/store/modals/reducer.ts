@@ -5,7 +5,8 @@ export enum MODAL_OPTIONS {
 	Villager = 'Villager',
 	Fish = 'Fish',
 	Bug = 'Bug',
-	Item = 'Item'
+	Item = 'Item',
+	User = 'User'
 }
 
 export interface IModalState {

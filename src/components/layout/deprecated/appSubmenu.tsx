@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
 
 interface Props {
@@ -41,6 +40,36 @@ class AppSubMenu extends Component<Props, State> {
 		return null;
 	}
 
+	onMenuItemClick(event, item, index) {
+		//avoid processing disabled items
+		if (item.disabled) {
+			event.preventDefault();
+			return true;
+		}
+
+		// if(this.props.root && this.props.onRootItemClick) {
+		//     this.props.onRootItemClick({
+		//         originalEvent: event,
+		//         item: item
+		//     });
+		// }
+
+		//execute command
+		if (item.command) {
+			item.command({ originalEvent: event, item: item });
+		}
+
+		if (index === this.state.activeIndex) this.setState({ activeIndex: null });
+		else this.setState({ activeIndex: index });
+
+		// if(this.props.onMenuItemClick) {
+		//     this.props.onMenuItemClick({
+		//         originalEvent: event,
+		//         item: item
+		//     });
+		// }
+	}
+
 	renderLinkContent(item) {
 		let submenuIcon = item.items && <i className="fa fa-fw fa-angle-down layout-menuitem-toggler" />;
 		let badge = item.badge && <span className="menuitem-badge">{item.badge}</span>;
@@ -59,15 +88,15 @@ class AppSubMenu extends Component<Props, State> {
 		let content = this.renderLinkContent(item);
 
 		return (
-			<NavLink
-				activeClassName="active-menuitem-routerlink"
-				to={item.to}
-				exact
+			<a
+				href={item.url}
+				onClick={(e) => this.onMenuItemClick(e, item, i)}
 				target={item.target}
+				onMouseEnter={(e) => {}}
 				className={item.styleClass}
 			>
 				{content}
-			</NavLink>
+			</a>
 		);
 	}
 

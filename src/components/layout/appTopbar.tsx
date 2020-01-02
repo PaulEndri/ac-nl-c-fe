@@ -1,24 +1,21 @@
 import React from 'react';
-import { Menu } from 'primereact/menu';
 import { Button } from 'primereact/button';
 import IsMobile from '../helpers/isMobile';
 import IsDesktop from '../helpers/isDesktop';
 
-import GoogleLogin from 'react-google-login';
-const MENU_ITEMS = [
-	{ label: 'Log In', icon: 'pi pi-power-off' },
-	{ label: 'Register', icon: 'pi pi-user-plus' },
-	{ label: 'About & Support', icon: 'pi pi-question' }
-];
+import { GoogleLogin, GoogleLogout } from 'react-google-login';
+import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
 
 interface AppTopbarProps {
 	setMenuState: Function;
+	push: Function;
 }
-const responseGoogle = (response) => {
+const responseGoogle = (response?) => {
 	console.log(response);
 };
-const AppTopbar = ({ setMenuState }: AppTopbarProps) => {
-	let menuRef: any = React.createRef();
+const AppTopbarComponent = ({ setMenuState, push }: AppTopbarProps) => {
+	const logoClick = () => push('/');
 
 	return (
 		<div className="layout-topbar">
@@ -27,18 +24,16 @@ const AppTopbar = ({ setMenuState }: AppTopbarProps) => {
 					<IsMobile>
 						<Button icon="fas fa-2x fa-bars" onClick={() => setMenuState()} />
 					</IsMobile>
-					<div className="acnl-logo">
-						<img style={{ height: '40px' }} src="/assets/leaf2.png" />
-					</div>
+					<IsDesktop>
+						<div className="acnl-logo" onClick={logoClick}>
+							<img style={{ height: '40px' }} src="/assets/leaf2.png" />
+						</div>
+					</IsDesktop>
 					<h1 className="topbar-title">AC:NL Companion</h1>
 					<div className="topbar-icons" style={{ marginTop: '5px' }}>
-						<IsMobile>
-							<Menu model={MENU_ITEMS} popup={true} ref={(el) => (menuRef = el)} />
-							<Button icon="fas fa-2x fa-ellipsis-v" onClick={(e) => menuRef.toggle(e)} />
-						</IsMobile>
 						<IsDesktop>
 							<GoogleLogin
-								clientId={process.env.GOOGLE_AUTH_SHIT}
+								clientId="520164195929-cg68r9jpv9u7b33p3dn6rp2kju6fb9lo.apps.googleusercontent.com"
 								render={(renderProps) => (
 									<Button
 										label="Log In"
@@ -47,18 +42,39 @@ const AppTopbar = ({ setMenuState }: AppTopbarProps) => {
 										disabled={renderProps.disabled}
 									/>
 								)}
-								buttonText="Login"
+								buttonText="test"
+								theme="dark"
+								scope="email"
 								onSuccess={responseGoogle}
 								onFailure={responseGoogle}
 								cookiePolicy={'single_host_origin'}
 							/>
+							<GoogleLogout
+								clientId="520164195929-cg68r9jpv9u7b33p3dn6rp2kju6fb9lo.apps.googleusercontent.com"
+								render={(renderProps) => (
+									<Button
+										label="Log Out"
+										icon="pi pi-power-off"
+										onClick={renderProps.onClick}
+										disabled={renderProps.disabled}
+									/>
+								)}
+								buttonText="Login"
+								onLogoutSuccess={responseGoogle}
+							/>
 							<Button label="About & Support" icon="pi pi-question" />
 						</IsDesktop>
 					</div>
+					<IsMobile>
+						<div className="acnl-logo" onClick={logoClick}>
+							<img style={{ height: '40px' }} src="/assets/leaf2.png" />
+						</div>
+					</IsMobile>
 				</div>
 			</div>
 		</div>
 	);
 };
 
+export const AppTopbar = connect(null, { push })(AppTopbarComponent);
 export default AppTopbar;
