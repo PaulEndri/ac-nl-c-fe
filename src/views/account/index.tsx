@@ -1,6 +1,6 @@
 import React from 'react';
 import { InputText } from 'primereact/inputtext';
-import { getUserCore } from '../../store/user/selectors';
+import { getUserData } from '../../store/user/selectors';
 import { setUserData } from '../../store/user/actions';
 import { connect } from 'react-redux';
 import { getGlobalSaving } from '../../store/global/selectors';
@@ -13,7 +13,7 @@ interface Props {
 }
 
 const mapStateToProps = (state) => ({
-	coreData: getUserCore(state),
+	coreData: getUserData(state),
 	saving: getGlobalSaving(state)
 });
 
@@ -38,7 +38,7 @@ const AccountViewComponent = ({ coreData, update, saving }: Props) => (
 				<span className="p-float-label">
 					<InputText
 						value={coreData.TownName || ''}
-						onChange={(e) => update({ TownName: e.currentTarget.value })}
+						onChange={(e) => update({ NewLeaf: { ...coreData.newLeaf, TownName: e.currentTarget.value } })}
 					/>
 					<label htmlFor="mayorName">Town Name</label>
 				</span>
