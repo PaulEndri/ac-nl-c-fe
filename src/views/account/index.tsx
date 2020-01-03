@@ -37,8 +37,8 @@ const AccountViewComponent = ({ coreData, update, saving }: Props) => (
 				<h1>Town Name</h1>
 				<span className="p-float-label">
 					<InputText
-						value={coreData.TownName || ''}
-						onChange={(e) => update({ NewLeaf: { ...coreData.newLeaf, TownName: e.currentTarget.value } })}
+						value={coreData.NewLeaf.TownName || ''}
+						onChange={(e) => update({ NewLeaf: { ...coreData.NewLeaf, TownName: e.currentTarget.value } })}
 					/>
 					<label htmlFor="mayorName">Town Name</label>
 				</span>
