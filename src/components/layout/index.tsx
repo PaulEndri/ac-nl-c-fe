@@ -11,6 +11,7 @@ import Modals from '../modals/';
 import { AppMenu } from './appMenu';
 import ClickOutside from '../helpers/clickOutside';
 import { getUserLoggedInStatus } from '../../store/user/selectors';
+import AppFooter from './appFooter';
 
 interface LayoutProps {
 	menuState: boolean;
@@ -119,6 +120,7 @@ const Layout: React.FC<LayoutProps> = ({ children, menuState, isLoggedIn, setMen
 					<div className="layout-overlay" />
 					<AppBreadcrumb />
 					<div className="layout-content-container">{children}</div>
+					<AppFooter />
 				</div>
 			</div>
 			<Modals />

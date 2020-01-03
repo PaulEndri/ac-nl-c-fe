@@ -48,6 +48,17 @@ export const AboutView = () => (
 				to keep me going!
 			</Panel>
 		</div>
+		<div className="p-col-11">
+			<Panel header="Privacy" style={{ height: IS_MOBILE ? 'auto' : '150px' }}>
+				At no point in time will any data be collected without the user knowing. The only user data we collect,
+				ever, is your google email if you log in so we can support cloud saves and persistance data stores.
+				Outside of your google email (we don't even save the token) there is no data and no cookies that we
+				store, use, distribute, or in any way handle. This site is deployed using Netlify and as such there may
+				be some additional analytics information that they collect, but it is limited to things such as screen
+				resolution, operating system, session duration, etc. No personally identifiable is at any point
+				collected
+			</Panel>
+		</div>
 	</div>
 );
 
