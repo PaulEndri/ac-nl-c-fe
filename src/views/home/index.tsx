@@ -88,12 +88,12 @@ const Dashboard = ({ date, setModal, userData }: DashboardProps) => {
 				<DashboardNaturePanel
 					title="Available Uncaught Bugs"
 					data={Bugs.filter((f) => userData.NewLeaf.Catalogued.Bugs.indexOf(f.Name) <= 0)}
-					iconKey="fish"
+					iconKey="bug"
 					modal={MODAL_OPTIONS.Bug}
 				/>
 				<DashboardNaturePanel
 					title="Available Uncaught Deep Sea Finds"
-					data={Bugs.filter((f) => userData.NewLeaf.Catalogued.DeepSea.indexOf(f.Name) <= 0)}
+					data={DeepSea.filter((f) => userData.NewLeaf.Catalogued.DeepSea.indexOf(f.Name) <= 0)}
 					iconKey="deepsea"
 					modal={MODAL_OPTIONS.DeepSea}
 				/>
