@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import AppTopbar from './appTopbar';
 import AppBreadcrumb from './appBreadcrumb';
 import { connect } from 'react-redux';
@@ -10,14 +10,19 @@ import { push } from 'connected-react-router';
 import Modals from '../modals/';
 import { AppMenu } from './appMenu';
 import ClickOutside from '../helpers/clickOutside';
+import { getUserLoggedInStatus } from '../../store/user/selectors';
+import { Growl } from 'primereact/growl';
 
+import { Messages } from 'primereact/messages';
 interface LayoutProps {
 	menuState: boolean;
 	push: Function;
 	setMenuState: Function;
+	isLoggedIn: Function;
 }
 
 const mapStateToProps = (state) => ({
+	isLoggedIn: getUserLoggedInStatus(state),
 	menuState: getGlobalMenu(state)
 });
 
@@ -26,18 +31,15 @@ const mapDispatchToProps = {
 	setMenuState: setGlobalMenuAction
 };
 
-const Layout: React.FC<LayoutProps> = ({ children, menuState, setMenuState, push }) => {
+const Layout: React.FC<LayoutProps> = ({ children, menuState, isLoggedIn, setMenuState, push }) => {
 	const menuData: any[] = [
 		{
 			label: 'Dashboard',
-			items: [ { label: 'Home', command: () => push('/') }, { label: 'My Town', command: () => push('/town') } ]
+			items: [ { label: 'Home', command: () => push('/') } ]
 		},
 		{
 			label: 'Villagers',
-			items: [
-				{ label: 'All Villagers', command: () => push('/villagers') },
-				{ label: 'My Villagers', command: () => push('/villagers/town'), requiresLogin: true }
-			]
+			items: [ { label: 'Villagers', command: () => push('/villagers') } ]
 		},
 		{
 			label: 'Nature',
@@ -78,6 +80,12 @@ const Layout: React.FC<LayoutProps> = ({ children, menuState, setMenuState, push
 		}
 	];
 
+	if (isLoggedIn) {
+		menuData[0].items.push({
+			label: 'My Town',
+			command: () => push('/town')
+		});
+	}
 	return (
 		<div className={classNames('layout-wrapper layout-static', { 'layout-mobile-active': IS_MOBILE && menuState })}>
 			<div>

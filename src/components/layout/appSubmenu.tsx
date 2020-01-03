@@ -47,27 +47,16 @@ class AppSubMenu extends Component<Props, State> {
 			return true;
 		}
 
-		// if(this.props.root && this.props.onRootItemClick) {
-		//     this.props.onRootItemClick({
-		//         originalEvent: event,
-		//         item: item
-		//     });
-		// }
-
 		//execute command
 		if (item.command) {
 			item.command({ originalEvent: event, item: item });
 		}
 
-		if (index === this.state.activeIndex) this.setState({ activeIndex: null });
-		else this.setState({ activeIndex: index });
-
-		// if(this.props.onMenuItemClick) {
-		//     this.props.onMenuItemClick({
-		//         originalEvent: event,
-		//         item: item
-		//     });
-		// }
+		if (index === this.state.activeIndex) {
+			this.setState({ activeIndex: null });
+		} else {
+			this.setState({ activeIndex: index });
+		}
 	}
 
 	renderLinkContent(item) {
