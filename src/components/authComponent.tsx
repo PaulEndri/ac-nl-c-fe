@@ -87,6 +87,7 @@ class AuthComponent extends React.Component<AuthProps, AuthState> {
 		}
 
 		this.props.setUserData({
+			...data,
 			Email: email,
 			isLoggedIn: true
 		});
