@@ -30,8 +30,11 @@ const UserModalComponent = ({ googleId, email, setUserData, setModal }: Props) =
 
 	const submit = async () => {
 		try {
-			const test = await ApiService.createPlayer(googleId, email, town, name);
-			setUserData(test);
+			const userData = await ApiService.createPlayer(googleId, email, town, name);
+			setUserData({
+				...userData,
+				isLoggedIn: true
+			});
 		} catch (e) {
 			console.error(e);
 		}
