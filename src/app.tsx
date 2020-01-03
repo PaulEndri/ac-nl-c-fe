@@ -35,15 +35,6 @@ function App() {
 			<Route exact path="/gyroids" component={GyroidView} />
 			<Route exact path="/town" component={DashboardView} />
 			<Route exact path="/about" component={AboutView} />
-
-			{/* <Route exact path="/house/:house" component={HouseView} />
-                <Route exact path="/house/:house/character/:character" component={CharacterView} />
-                <Route exact path="/about" component={About} />
-                <Route exact path="/characters" component={CharactersView} />
-                <Route exact path="/classes" component={ClassesView} />
-                <Route exact path="/recruitment" component={RecruitmentTable} />
-                <Route exact path="/lostItems" component={LostItemsView} />
-                <Route exact path="/characterPlanner" component={CharacterPlanner} /> */}
 			<Persistance />
 		</Layout>
 	);

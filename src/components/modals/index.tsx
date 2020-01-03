@@ -36,7 +36,6 @@ const Modals = ({ modalKey, activeModal, setModal }: modalComponentProps) => (
 			dismissableMask={true}
 			footer={
 				<React.Fragment>
-					{activeModal === MODAL_OPTIONS.User && <UserModal.Footer />}
 					{activeModal === MODAL_OPTIONS.Villager && <VillagerModal.Footer name={modalKey} />}
 					{activeModal === MODAL_OPTIONS.Fish && <FishModal.Footer name={modalKey} />}
 					{activeModal === MODAL_OPTIONS.Bug && <BugModal.Footer name={modalKey} />}

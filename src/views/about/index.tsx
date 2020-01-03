@@ -1,10 +1,11 @@
 import React from 'react';
 import { Panel } from 'primereact/components/panel/Panel';
+import { IS_MOBILE } from '../../components/helpers/isMobile';
 
 export const AboutView = () => (
 	<div className="p-grid">
 		<div className="p-col-12 p-md-8">
-			<Panel header="About the Site" style={{ height: '150px' }}>
+			<Panel header="About the Site" style={{ height: IS_MOBILE ? 'auto' : '150px' }}>
 				Hi! Thanks for stopping by, this is an Animal Crossing Companion app for New Leaf: Welcome Amiibo. It's
 				meant to be a one stop shop for core information such as Villager likes and dislikes, tracking museum
 				information, catalog information, and more. The goal is to get this site fully functional so I can
@@ -12,7 +13,7 @@ export const AboutView = () => (
 			</Panel>
 		</div>
 		<div className="p-col-12 p-md-4 p-lg-3">
-			<Panel header="Need help?" style={{ height: '150px' }}>
+			<Panel header="Need help?" style={{ height: IS_MOBILE ? 'auto' : '150px' }}>
 				Need some help? Want to let me know about a bug? Found something missing you feel must be here? We have
 				a discord server, feel free to drop by!
 				<a href="https://discord.gg/Fm5m9CC">
@@ -22,7 +23,7 @@ export const AboutView = () => (
 		</div>
 
 		<div className="p-col-6 p-md-4">
-			<Panel header="Tech stack" style={{ height: '150px' }}>
+			<Panel header="Tech stack" style={{ height: IS_MOBILE ? 'auto' : '150px' }}>
 				This site runs on React, Node, Typescript, Koa, and such. Hosted entirely on Netlify because I am not a
 				dev ops guy :D Feel free to check out the source code at{' '}
 				<a href="https://github.com/PaulEndri/ac-nl-c-fe">
@@ -31,7 +32,7 @@ export const AboutView = () => (
 			</Panel>
 		</div>
 		<div className="p-col-6 p-md-4">
-			<Panel header="About the Author" style={{ height: '150px' }}>
+			<Panel header="About the Author" style={{ height: IS_MOBILE ? 'auto' : '150px' }}>
 				I've been developing professionally for five plus years, working in all sorts of industries and jobs. I
 				love NodeJS and gaming and often find myself with one leading into the other and here we end up. This
 				very much a passion project, but I have more! Feel free to check out another of my projects:{' '}
@@ -39,7 +40,7 @@ export const AboutView = () => (
 			</Panel>
 		</div>
 		<div className="p-col-6 p-md-3">
-			<Panel header="Coffee?" style={{ height: '150px' }}>
+			<Panel header="Coffee?" style={{ height: IS_MOBILE ? 'auto' : '150px' }}>
 				This site was built on several galloons of caffeine, feel free to donate a{' '}
 				<a href="https://www.buymeacoffee.com/608LHcl">
 					<i className="fas fa-coffee" />cup of coffee!

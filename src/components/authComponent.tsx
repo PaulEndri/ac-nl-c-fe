@@ -81,8 +81,12 @@ class AuthComponent extends React.Component<AuthProps, AuthState> {
 	async fetchData(email: string) {
 		const data = await ApiService.getPlayer(email);
 
+		if (!data) {
+			console.error('No User Found');
+			throw new Error('Go');
+		}
+
 		this.props.setUserData({
-			...data,
 			Email: email,
 			isLoggedIn: true
 		});

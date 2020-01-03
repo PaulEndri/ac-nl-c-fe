@@ -10,23 +10,8 @@ export class ApiService {
 			return await response.json();
 		} catch (e) {
 			console.log(e);
-			return {
-				GoogleId: '110912679983683131652',
-				Name: 'zsdfg',
-				NewLeaf: {
-					Museum: { Fishes: [], Bugs: [], Art: [], Fossils: [] },
-					Catalogued: {
-						Furniture: { Furniture: [], Gyroids: [], Wallpapers: [], Flooring: [], Paper: [] },
-						Clothing: [],
-						Fishes: [],
-						Bugs: [],
-						Art: [],
-						Fossils: []
-					},
-					Villagers: [],
-					TownName: 'asdad'
-				}
-			};
+
+			return null;
 		}
 	}
 
