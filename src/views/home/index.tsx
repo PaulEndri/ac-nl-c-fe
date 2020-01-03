@@ -81,19 +81,19 @@ const Dashboard = ({ date, setModal, userData }: DashboardProps) => {
 			<IsLoggedIn>
 				<DashboardNaturePanel
 					title="Available Uncaught Fishes"
-					data={Fishes.filter((f) => userData.NewLeaf.Catalogued.Fishes.indexOf(f.Name) <= 0)}
+					data={Fishes.filter((f) => !userData.NewLeaf.Catalogued.Fishes.includes(f.Name))}
 					iconKey="fish"
 					modal={MODAL_OPTIONS.Fish}
 				/>
 				<DashboardNaturePanel
 					title="Available Uncaught Bugs"
-					data={Bugs.filter((f) => userData.NewLeaf.Catalogued.Bugs.indexOf(f.Name) <= 0)}
+					data={Bugs.filter((f) => !userData.NewLeaf.Catalogued.Bugs.includes(f.Name))}
 					iconKey="bug"
 					modal={MODAL_OPTIONS.Bug}
 				/>
 				<DashboardNaturePanel
 					title="Available Uncaught Deep Sea Finds"
-					data={DeepSea.filter((f) => userData.NewLeaf.Catalogued.DeepSea.indexOf(f.Name) <= 0)}
+					data={DeepSea.filter((f) => !userData.NewLeaf.Catalogued.DeepSea.includes(f.Name))}
 					iconKey="deepsea"
 					modal={MODAL_OPTIONS.DeepSea}
 				/>
