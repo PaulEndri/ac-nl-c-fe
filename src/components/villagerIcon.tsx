@@ -16,7 +16,7 @@ export const VillagerIcon = ({ villager, size = 'large', className }: VillagerIc
 	<img
 		className={className}
 		alt={villager.Name}
-		src={`/assets/villagers/${villager.Name}.png`}
+		src={`https://ac-companion.s3.us-east-2.amazonaws.com/images/villagers/${villager.Name}.png`}
 		style={{ height: SIZES[size], width: 'auto' }}
 	/>
 );

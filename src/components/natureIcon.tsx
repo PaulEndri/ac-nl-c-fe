@@ -17,7 +17,7 @@ export const NatureIcon = ({ Name, Type, Size = 'Regular', className }: NatureIc
 	<img
 		alt={Name}
 		className={classNames(`acc-nature-icon ${Type}`, { [className]: className })}
-		src={`/assets/${Type}/${Name}.png`}
+		src={`https://ac-companion.s3.us-east-2.amazonaws.com/images/${Type}/${Name}.png`}
 		style={{ height: SIZES[Size], width: SIZES[Size] }}
 	/>
 );
