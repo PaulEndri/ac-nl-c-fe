@@ -37,6 +37,10 @@ interface DashboardNaturePanelProps {
 const DashboardNaturePanel = ({ title, iconKey, data, modal }: DashboardNaturePanelProps) => {
 	const dispatch = useDispatch();
 
+	if (data.length === 0) {
+		return null;
+	}
+
 	return (
 		<div className="p-col-12 p-md-4 p-lg-3">
 			<Panel header={title} toggleable={IS_MOBILE} className="dashboard-card card">
