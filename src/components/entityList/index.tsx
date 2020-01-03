@@ -94,7 +94,7 @@ const EntityList = ({ date, data, dataType, title, setModal }: EntityListProps) 
 					paddingTop: '16px'
 				}}
 			>
-				<NatureIcon className="acc-selectable" Type={dataType} Size="Regular" Name={data.Name} />
+				<NatureIcon className="acc-selectable entity-card" Type={dataType} Size="Regular" Name={data.Name} />
 			</span>
 		);
 
