@@ -18,7 +18,7 @@ const mapDispatchToProps = {
 	setGlobalSavePending
 };
 
-const INTERVAL = 5 * 1000;
+const INTERVAL = 2 * 1000;
 class PersistanceComponent extends React.Component<Props> {
 	queueTimeout = null;
 

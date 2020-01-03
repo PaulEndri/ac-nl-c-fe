@@ -32,17 +32,20 @@ const mapDispatchToProps = {
 };
 
 const Layout: React.FC<LayoutProps> = ({ children, menuState, isLoggedIn, setMenuState, push }) => {
-	const menuData: any[] = [
+	let menuData: any[] = [
 		{
 			label: 'Dashboard',
-			items: [ { label: 'Home', command: () => push('/') } ]
+			icon: 'fas fa-tachometer-alt',
+			command: () => push('/')
 		},
 		{
 			label: 'Villagers',
-			items: [ { label: 'Villagers', command: () => push('/villagers') } ]
+			icon: 'fas fa-users',
+			command: () => push('/villagers')
 		},
 		{
 			label: 'Nature',
+			icon: 'fas fa-spider',
 			items: [
 				{ label: 'Fishes', command: () => push('/fishes') },
 				{ label: 'Bugs', command: () => push('/bugs') }
@@ -50,6 +53,7 @@ const Layout: React.FC<LayoutProps> = ({ children, menuState, isLoggedIn, setMen
 		},
 		{
 			label: 'Museum',
+			icon: 'fas fa-landmark',
 			items: [
 				{ label: 'Fossils', command: () => push('/fossils') },
 				{ label: 'Art', command: () => push('/art') }
@@ -57,6 +61,7 @@ const Layout: React.FC<LayoutProps> = ({ children, menuState, isLoggedIn, setMen
 		},
 		{
 			label: 'Clothing',
+			icon: 'fas fa-tshirt',
 			items: [
 				{ label: 'Tops', command: () => push('/clothing?type=Tops') },
 				{ label: 'Bottoms', command: () => push('/clothing?type=Bottoms') },
@@ -70,6 +75,7 @@ const Layout: React.FC<LayoutProps> = ({ children, menuState, isLoggedIn, setMen
 		},
 		{
 			label: 'Furniture & More',
+			icon: 'fas fa-leaf',
 			items: [
 				{ label: 'Furniture', command: () => push('/furniture') },
 				{ label: 'Wallpaper', command: () => push('/wallpaper') },
@@ -80,12 +86,29 @@ const Layout: React.FC<LayoutProps> = ({ children, menuState, isLoggedIn, setMen
 		}
 	];
 
-	if (isLoggedIn) {
-		menuData[0].items.push({
-			label: 'My Town',
-			command: () => push('/town')
-		});
+	if (true) {
+		menuData[0].command = null;
+		menuData[0].items = [
+			{ label: 'Home', command: () => push('/') },
+			{
+				label: 'My Town',
+				command: () => push('/town')
+			}
+		];
+
+		if (!IS_MOBILE) {
+			menuData = [
+				menuData[0],
+				{
+					label: 'My Account',
+					command: () => push('/account'),
+					icon: 'fas fa-user'
+				},
+				...menuData.slice(1)
+			];
+		}
 	}
+
 	return (
 		<div className={classNames('layout-wrapper layout-static', { 'layout-mobile-active': IS_MOBILE && menuState })}>
 			<div>

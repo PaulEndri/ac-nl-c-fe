@@ -17,6 +17,7 @@ import WallpaperView from './views/wallpaper';
 import GyroidView from './views/gyroids';
 import DashboardView from './views/dashboard';
 import AboutView from './views/about';
+import AccountView from './views/account';
 
 function App() {
 	return (
@@ -35,6 +36,8 @@ function App() {
 			<Route exact path="/gyroids" component={GyroidView} />
 			<Route exact path="/town" component={DashboardView} />
 			<Route exact path="/about" component={AboutView} />
+			<Route exact path="/account" component={AccountView} />
+
 			<Persistance />
 		</Layout>
 	);

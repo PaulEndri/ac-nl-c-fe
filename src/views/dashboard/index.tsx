@@ -23,6 +23,7 @@ import { Column } from 'primereact/column';
 import VillagerIcon from '../../components/villagerIcon';
 import { setModal } from '../../store/modals/actions';
 import { MODAL_OPTIONS } from '../../store/modals/reducer';
+import IsLoggedIn from '../../components/helpers/isLoggedIn';
 
 interface Props {
 	userData: IPlayer;
@@ -109,81 +110,83 @@ const DashboardViewComponent = ({ userData, setModal }: Props) => {
 	};
 
 	return (
-		<div className="p-grid">
-			<div className="p-col-12">
-				<Panel toggleable={true} header="My Villagers">
-					{getVillagers(Villagers).map((v) => (
-						<div
-							className="dashboard-villager"
-							key={v.Name}
-							onClick={() => setModal(MODAL_OPTIONS.Villager, v.Name)}
-						>
-							<VillagerIcon size="small" villager={v} />
-						</div>
-					))}
-				</Panel>
+		<IsLoggedIn>
+			<div className="p-grid">
+				<div className="p-col-12">
+					<Panel toggleable={true} header="My Villagers">
+						{getVillagers(Villagers).map((v) => (
+							<div
+								className="dashboard-villager"
+								key={v.Name}
+								onClick={() => setModal(MODAL_OPTIONS.Villager, v.Name)}
+							>
+								<VillagerIcon size="small" villager={v} />
+							</div>
+						))}
+					</Panel>
+				</div>
+				<DashboardViewPanel
+					totalValue={Fishes.length}
+					currentValue={Catalogued ? Catalogued.Fishes.length : 0}
+					title="Fishes Caught"
+				/>
+				<DashboardViewPanel
+					totalValue={Fishes.length}
+					currentValue={Museum ? Museum.Fishes.length : 0}
+					title="Fishes Donated"
+				/>
+				<DashboardViewPanel
+					totalValue={Bugs.length}
+					currentValue={Catalogued ? Catalogued.Bugs.length : 0}
+					title="Bugs Caught"
+				/>
+				<DashboardViewPanel
+					totalValue={Bugs.length}
+					currentValue={Museum ? Museum.Bugs.length : 0}
+					title="Bugs Donated"
+				/>
+				<DashboardViewPanel
+					totalValue={Fossils.length}
+					currentValue={Museum ? Museum.Fossils.length : 0}
+					title="Fossils Donated"
+				/>
+				<DashboardViewPanel
+					totalValue={Art.length}
+					currentValue={Museum ? Museum.Art.length : 0}
+					title="Artwork Donated"
+				/>
+				<DashboardViewPanel
+					totalValue={Clothing.length}
+					currentValue={Catalogued ? Catalogued.Clothing.length : 0}
+					title="Clothing Collected"
+				/>
+				<DashboardViewPanel
+					totalValue={Furnitures.length}
+					currentValue={Furniture.Furniture ? Furniture.Furniture.length : 0}
+					title="Furniture Collected"
+				/>
+				<DashboardViewPanel
+					totalValue={Wallpapers.length}
+					currentValue={Furniture.Wallpapers ? Furniture.Wallpapers.length : 0}
+					title="Wallpaper Collected"
+				/>
+				<DashboardViewPanel
+					totalValue={Flooring.length}
+					currentValue={Furniture.Flooring ? Furniture.Flooring.length : 0}
+					title="Flooring Collected"
+				/>
+				<DashboardViewPanel
+					totalValue={Gyroids.length}
+					currentValue={Furniture.Gyroids ? Furniture.Gyroids.length : 0}
+					title="Gyroids Collected"
+				/>
+				<DashboardViewPanel
+					totalValue={Papers.length}
+					currentValue={Furniture.Paper ? Furniture.Paper.length : 0}
+					title="Paper Collected"
+				/>
 			</div>
-			<DashboardViewPanel
-				totalValue={Fishes.length}
-				currentValue={Catalogued ? Catalogued.Fishes.length : 0}
-				title="Fishes Caught"
-			/>
-			<DashboardViewPanel
-				totalValue={Fishes.length}
-				currentValue={Museum ? Museum.Fishes.length : 0}
-				title="Fishes Donated"
-			/>
-			<DashboardViewPanel
-				totalValue={Bugs.length}
-				currentValue={Catalogued ? Catalogued.Bugs.length : 0}
-				title="Bugs Caught"
-			/>
-			<DashboardViewPanel
-				totalValue={Bugs.length}
-				currentValue={Museum ? Museum.Bugs.length : 0}
-				title="Bugs Donated"
-			/>
-			<DashboardViewPanel
-				totalValue={Fossils.length}
-				currentValue={Museum ? Museum.Fossils.length : 0}
-				title="Fossils Donated"
-			/>
-			<DashboardViewPanel
-				totalValue={Art.length}
-				currentValue={Museum ? Museum.Art.length : 0}
-				title="Artwork Donated"
-			/>
-			<DashboardViewPanel
-				totalValue={Clothing.length}
-				currentValue={Catalogued ? Catalogued.Clothing.length : 0}
-				title="Clothing Collected"
-			/>
-			<DashboardViewPanel
-				totalValue={Furnitures.length}
-				currentValue={Furniture.Furniture ? Furniture.Furniture.length : 0}
-				title="Furniture Collected"
-			/>
-			<DashboardViewPanel
-				totalValue={Wallpapers.length}
-				currentValue={Furniture.Wallpapers ? Furniture.Wallpapers.length : 0}
-				title="Wallpaper Collected"
-			/>
-			<DashboardViewPanel
-				totalValue={Flooring.length}
-				currentValue={Furniture.Flooring ? Furniture.Flooring.length : 0}
-				title="Flooring Collected"
-			/>
-			<DashboardViewPanel
-				totalValue={Gyroids.length}
-				currentValue={Furniture.Gyroids ? Furniture.Gyroids.length : 0}
-				title="Gyroids Collected"
-			/>
-			<DashboardViewPanel
-				totalValue={Papers.length}
-				currentValue={Furniture.Paper ? Furniture.Paper.length : 0}
-				title="Paper Collected"
-			/>
-		</div>
+		</IsLoggedIn>
 	);
 };
 
