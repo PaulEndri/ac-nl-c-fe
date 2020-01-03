@@ -86,7 +86,7 @@ const Layout: React.FC<LayoutProps> = ({ children, menuState, isLoggedIn, setMen
 		}
 	];
 
-	if (true) {
+	if (isLoggedIn) {
 		menuData[0].command = null;
 		menuData[0].items = [
 			{ label: 'Home', command: () => push('/') },

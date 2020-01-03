@@ -6,10 +6,12 @@ import { MODAL_OPTIONS } from '../store/modals/reducer';
 import { getUserLoggedInStatus } from '../store/user/selectors';
 import { setUserData } from '../store/user/actions';
 import ApiService from '../service/api';
+import { push } from 'connected-react-router';
 
 interface AuthProps {
 	isLoggedIn: boolean;
 	setModal: Function;
+	push: Function;
 	setUserData: Function;
 	LoginButton: (any) => JSX.Element;
 	LogoutButton: (any) => JSX.Element;
@@ -27,6 +29,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
+	push,
 	setUserData,
 	setModal
 };
@@ -58,12 +61,14 @@ class AuthComponent extends React.Component<AuthProps, AuthState> {
 	handleGoogleLogout() {
 		document.cookie = `${AUTH_COOKIE}=;expires=${new Date(0)}`;
 		this.props.setUserData({
-			Email: '',
-			GoogleId: '',
-			Name: '',
+			Email: null,
+			GoogleId: null,
+			Name: null,
 			NewLeaf: {},
 			isLoggedIn: false
 		});
+
+		this.props.push('/');
 	}
 
 	async handleGoogleLogin({ profileObj, ...rest }: GoogleLoginResponse) {
