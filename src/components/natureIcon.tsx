@@ -4,7 +4,7 @@ import classNames from 'classnames';
 interface NatureIconProps {
 	className?: string;
 	Name: string;
-	Type: 'bug' | 'fish';
+	Type: 'bug' | 'fish' | 'deepsea';
 	Size: 'Small' | 'Regular';
 }
 

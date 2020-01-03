@@ -2,7 +2,7 @@ import React from 'react';
 import AppSubMenu from './appSubmenu';
 import { ScrollPanel } from 'primereact/scrollpanel';
 import IsMobile from '../helpers/isMobile';
-import Auth from '../authComponent';
+import Auth from '../auth';
 import IsLoggedIn from '../helpers/isLoggedIn';
 import { LightingSwitch } from '../lightingSwitch';
 

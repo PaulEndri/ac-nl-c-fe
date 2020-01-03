@@ -1,4 +1,4 @@
-import React, { createRef } from 'react';
+import React from 'react';
 import AppTopbar from './appTopbar';
 import AppBreadcrumb from './appBreadcrumb';
 import { connect } from 'react-redux';
@@ -11,9 +11,7 @@ import Modals from '../modals/';
 import { AppMenu } from './appMenu';
 import ClickOutside from '../helpers/clickOutside';
 import { getUserLoggedInStatus } from '../../store/user/selectors';
-import { Growl } from 'primereact/growl';
 
-import { Messages } from 'primereact/messages';
 interface LayoutProps {
 	menuState: boolean;
 	push: Function;
@@ -48,7 +46,8 @@ const Layout: React.FC<LayoutProps> = ({ children, menuState, isLoggedIn, setMen
 			icon: 'fas fa-spider',
 			items: [
 				{ label: 'Fishes', command: () => push('/fishes') },
-				{ label: 'Bugs', command: () => push('/bugs') }
+				{ label: 'Bugs', command: () => push('/bugs') },
+				{ label: 'Deep Sea', command: () => push('/deepSea') }
 			]
 		},
 		{

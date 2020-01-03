@@ -4,7 +4,7 @@
     "private": true,
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.12.0",
-        "ac-nl-sdk": "^1.0.5",
+        "ac-nl-sdk": "^1.1.0",
         "classnames": "^2.2.6",
         "connected-react-router": "^6.6.1",
         "dotenv": "^8.2.0",

@@ -10,6 +10,7 @@ import VillagerModal from './villager';
 import FishModal from './fishModal';
 import UserModal from './userModal';
 import BugModal from './bugModal';
+import DeepSeaModal from './deepSeaModal';
 
 interface modalComponentProps {
 	activeModal: MODAL_OPTIONS;
@@ -30,7 +31,10 @@ const Modals = ({ modalKey, activeModal, setModal }: modalComponentProps) => (
 	<div>
 		<Dialog
 			header={modalKey}
-			className={classNames({ mobile: IS_MOBILE, 'acc-view-width': activeModal === MODAL_OPTIONS.Villager })}
+			className={classNames({
+				mobile: IS_MOBILE,
+				'acc-view-width': activeModal === MODAL_OPTIONS.Villager || IS_MOBILE
+			})}
 			visible={!!activeModal}
 			onHide={() => setModal(null, null)}
 			dismissableMask={true}
@@ -39,13 +43,14 @@ const Modals = ({ modalKey, activeModal, setModal }: modalComponentProps) => (
 					{activeModal === MODAL_OPTIONS.Villager && <VillagerModal.Footer name={modalKey} />}
 					{activeModal === MODAL_OPTIONS.Fish && <FishModal.Footer name={modalKey} />}
 					{activeModal === MODAL_OPTIONS.Bug && <BugModal.Footer name={modalKey} />}
+					{activeModal === MODAL_OPTIONS.DeepSea && <DeepSeaModal.Footer name={modalKey} />}
 				</React.Fragment>
 			}
 		>
 			{activeModal === MODAL_OPTIONS.Villager && <VillagerModal.Component villagerName={modalKey} />}
 			{activeModal === MODAL_OPTIONS.Fish && <FishModal.Component name={modalKey} />}
 			{activeModal === MODAL_OPTIONS.Bug && <BugModal.Component name={modalKey} />}
-
+			{activeModal === MODAL_OPTIONS.DeepSea && <DeepSeaModal.Component name={modalKey} />}
 			{activeModal === MODAL_OPTIONS.User && <UserModal.Component />}
 		</Dialog>
 	</div>

@@ -22,13 +22,33 @@ export const initialUserState: IUserState = {
 	Email: '',
 	GoogleId: '',
 	Name: '',
-	NewLeaf: {
-		TownName: null,
-		Catalogued: null,
-		Museum: null,
-		Villagers: null
-	},
-	lastUpdated: null,
+    NewLeaf: {
+        TownName: null,
+        Villagers: [],
+        Museum: {
+            Fishes: [],
+            DeepSea: [],
+            Bugs: [],
+            Art: [],
+            Fossils: []
+        },
+        Catalogued: {
+            Furniture: {
+                Furniture: [],
+                Wallpapers: [],
+                Flooring: [],
+                Paper: [],
+                Gyroids: []
+            },
+            Clothing: [],
+            Fishes: [],
+            Bugs: [],
+            Art: [],
+            Fossils: [],
+            DeepSea: []
+        }
+    },
+    lastUpdated: null,
 	isLoggedIn: false
 };
 

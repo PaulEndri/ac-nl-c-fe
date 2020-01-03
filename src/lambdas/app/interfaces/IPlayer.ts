@@ -6,6 +6,7 @@ export interface ISaveData {
 		Bugs: string[];
 		Art: string[];
 		Fossils: string[];
+		DeepSea: string[];
 	};
 	Catalogued: {
 		Furniture: {
@@ -20,6 +21,7 @@ export interface ISaveData {
 		Bugs: string[];
 		Art: string[];
 		Fossils: string[];
+		DeepSea: string[];
 	};
 }
 export interface IPlayer {

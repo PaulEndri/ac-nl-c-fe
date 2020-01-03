@@ -8,7 +8,7 @@ import FishesView from './views/fishes';
 import BugsView from './views/bugs';
 import FossilsView from './views/fossils';
 import ArtView from './views/art';
-import Persistance from './components/persistanceComponent';
+import Persistance from './components/persistance';
 import ClothingView from './views/clothing';
 import FurnitureView from './views/furniture';
 import PaperView from './views/paper';
@@ -18,6 +18,7 @@ import GyroidView from './views/gyroids';
 import DashboardView from './views/dashboard';
 import AboutView from './views/about';
 import AccountView from './views/account';
+import DeepSeaView from './views/deepsea';
 
 function App() {
 	return (
@@ -37,6 +38,7 @@ function App() {
 			<Route exact path="/town" component={DashboardView} />
 			<Route exact path="/about" component={AboutView} />
 			<Route exact path="/account" component={AccountView} />
+			<Route exact path="/deepSea" component={DeepSeaView} />
 
 			<Persistance />
 		</Layout>

@@ -6,7 +6,7 @@ import { DataView } from 'primereact/dataview';
 import { Panel } from 'primereact/components/panel/Panel';
 import { setModal } from '../../store/modals/actions';
 import VillagerIcon from '../villagerIcon';
-import { IVillager, IItem } from 'ac-nl-sdk';
+import { IVillager, IItem, CalenderService, IFish, IBug, IDeepSea } from 'ac-nl-sdk';
 import NatureIcon from '../natureIcon';
 import { MODAL_OPTIONS } from '../../store/modals/reducer';
 import classNames from 'classnames';
@@ -14,7 +14,7 @@ import { InputSwitch } from 'primereact/inputswitch';
 
 interface EntityListProps {
 	data: (IItem | IVillager)[];
-	dataType: string;
+	dataType: 'fish' | 'bug' | 'deepsea' | 'Villager';
 	date: string;
 	setModal: Function;
 	title: string;
@@ -28,10 +28,27 @@ const mapDispatchToProps = {
 	setModal
 };
 
-const EntityList = ({ data, dataType, title, setModal }: EntityListProps) => {
+const EntityList = ({ date, data, dataType, title, setModal }: EntityListProps) => {
 	const [ filterValue, setFilterValue ] = useState('');
 	const [ locationValue, setLocationValue ] = useState('');
 	const [ showingAll, toggleAll ] = useState(true);
+
+	let modalOption: MODAL_OPTIONS;
+
+	switch (dataType) {
+		case 'bug':
+			modalOption = MODAL_OPTIONS.Bug;
+			break;
+		case 'fish':
+			modalOption = MODAL_OPTIONS.Fish;
+			break;
+		case 'deepsea':
+			modalOption = MODAL_OPTIONS.DeepSea;
+			break;
+		default:
+			modalOption = MODAL_OPTIONS.Villager;
+			break;
+	}
 
 	const EntityListDataViewHeader = (
 		<div className="p-grid">
@@ -54,7 +71,7 @@ const EntityList = ({ data, dataType, title, setModal }: EntityListProps) => {
 					<div style={{ display: 'flex' }}>
 						<span className="p-col-10">{showingAll ? 'Show Current' : 'Show All'}</span>
 						<InputSwitch
-							checked={showingAll}
+							checked={!showingAll}
 							onChange={() => toggleAll(!showingAll)}
 							style={{ marginTop: '10px' }}
 						/>
@@ -65,10 +82,11 @@ const EntityList = ({ data, dataType, title, setModal }: EntityListProps) => {
 	);
 
 	const ItemDataViewTemplate = (data: IItem) =>
-		data && (
+		data &&
+		dataType !== 'Villager' && (
 			<span
 				className="p-col-4 p-md-1"
-				onClick={() => setModal(dataType === 'fish' ? MODAL_OPTIONS.Fish : MODAL_OPTIONS.Bug, data.Name)}
+				onClick={() => setModal(modalOption, data.Name)}
 				style={{
 					margin: 'auto',
 					display: 'block',
@@ -76,18 +94,13 @@ const EntityList = ({ data, dataType, title, setModal }: EntityListProps) => {
 					paddingTop: '16px'
 				}}
 			>
-				<NatureIcon
-					className="acc-selectable"
-					Type={dataType === 'fish' ? 'fish' : 'bug'}
-					Size="Regular"
-					Name={data.Name}
-				/>
+				<NatureIcon className="acc-selectable" Type={dataType} Size="Regular" Name={data.Name} />
 			</span>
 		);
 
 	const VillagerDataViewTemplate = (data: IVillager) =>
 		data && (
-			<span className="p-col-6 p-md-2" onClick={() => setModal(dataType, data.Name)}>
+			<span className="p-col-6 p-md-2" onClick={() => setModal(modalOption, data.Name)}>
 				<Panel
 					className="p-grid acc-selectable"
 					header={data.Name}
@@ -109,12 +122,25 @@ const EntityList = ({ data, dataType, title, setModal }: EntityListProps) => {
 	let entityData = data;
 
 	if (!showingAll && dataType !== 'Villager') {
+		const service = new CalenderService(date);
+
+		switch (dataType) {
+			case 'fish':
+				entityData = service.getFishes(entityData as IFish[]);
+				break;
+			case 'bug':
+				entityData = service.getBugs(entityData as IBug[]);
+				break;
+			case 'deepsea':
+				entityData = service.getDeepSea(entityData as IDeepSea[]);
+				break;
+		}
 		// do some shit to turn entityData into limited by Time and Month;
 	}
 
 	entityData = !(filterValue && filterValue.length >= 1)
-		? data.map((d) => ({ ...d }))
-		: data.filter((v) => v.Name.toLowerCase().includes(filterValue.toLowerCase()));
+		? entityData.map((d) => ({ ...d }))
+		: entityData.filter((v) => v.Name.toLowerCase().includes(filterValue.toLowerCase()));
 
 	entityData = !(locationValue && locationValue.length >= 1)
 		? entityData

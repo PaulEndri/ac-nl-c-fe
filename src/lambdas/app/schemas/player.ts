@@ -11,7 +11,8 @@ export const SaveDataSchema = new Schema({
 		Fishes: [ Types.String ],
 		Bugs: [ Types.String ],
 		Art: [ Types.String ],
-		Fossils: [ Types.String ]
+		Fossils: [ Types.String ],
+		DeepSea: [ Types.String ]
 	},
 	Catalogued: {
 		Furniture: {
@@ -25,7 +26,8 @@ export const SaveDataSchema = new Schema({
 		Fishes: [ Types.String ],
 		Bugs: [ Types.String ],
 		Art: [ Types.String ],
-		Fossils: [ Types.String ]
+		Fossils: [ Types.String ],
+		DeepSea: [ Types.String ]
 	}
 });
 

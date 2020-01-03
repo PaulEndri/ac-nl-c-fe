@@ -18,8 +18,6 @@ import {
 	Papers,
 	Villagers as AllVillagers
 } from 'ac-nl-sdk';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
 import VillagerIcon from '../../components/villagerIcon';
 import { setModal } from '../../store/modals/actions';
 import { MODAL_OPTIONS } from '../../store/modals/reducer';
@@ -57,6 +55,7 @@ const PANEL_COLORS = [
 	'limegreen',
 	'green'
 ];
+
 const DashboardViewPanel = ({ currentValue, totalValue, title }: PanelProps) => {
 	const percentage = currentValue / totalValue;
 	const colorIndex = Math.ceil(percentage * 10);
@@ -77,21 +76,6 @@ const DashboardViewPanel = ({ currentValue, totalValue, title }: PanelProps) => 
 		</div>
 	);
 };
-
-const MONTHS = [
-	'January',
-	'February',
-	'March',
-	'April',
-	'May',
-	'June',
-	'July',
-	'August',
-	'September',
-	'October',
-	'November',
-	'December'
-];
 
 const DashboardViewComponent = ({ userData, setModal }: Props) => {
 	if (!userData) {

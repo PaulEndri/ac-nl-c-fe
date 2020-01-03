@@ -60,11 +60,37 @@ class AuthComponent extends React.Component<AuthProps, AuthState> {
 
 	handleGoogleLogout() {
 		document.cookie = `${AUTH_COOKIE}=;expires=${new Date(0)}`;
+
 		this.props.setUserData({
 			Email: null,
 			GoogleId: null,
 			Name: null,
-			NewLeaf: {},
+			NewLeaf: {
+				TownName: null,
+				Villagers: [],
+				Museum: {
+					Fishes: [],
+					DeepSea: [],
+					Bugs: [],
+					Art: [],
+					Fossils: []
+				},
+				Catalogued: {
+					Furniture: {
+						Furniture: [],
+						Wallpapers: [],
+						Flooring: [],
+						Paper: [],
+						Gyroids: []
+					},
+					Clothing: [],
+					Fishes: [],
+					Bugs: [],
+					Art: [],
+					Fossils: [],
+					DeepSea: []
+				}
+			},
 			isLoggedIn: false
 		});
 

@@ -6,6 +6,7 @@ export enum MODAL_OPTIONS {
 	Fish = 'Fish',
 	Bug = 'Bug',
 	Item = 'Item',
+	DeepSea = 'DeepSea',
 	User = 'User'
 }
 

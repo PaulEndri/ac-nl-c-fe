@@ -4,7 +4,7 @@ import IsMobile from '../helpers/isMobile';
 import IsDesktop from '../helpers/isDesktop';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
-import Auth from '../authComponent';
+import Auth from '../auth';
 import { LightingSwitch } from '../lightingSwitch';
 
 interface AppTopbarProps {

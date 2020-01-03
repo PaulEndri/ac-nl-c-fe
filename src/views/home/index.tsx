@@ -9,14 +9,19 @@ import NatureIcon from '../../components/natureIcon';
 import VillagerIcon from '../../components/villagerIcon';
 import { IS_MOBILE } from '../../components/helpers/isMobile';
 import { MODAL_OPTIONS } from '../../store/modals/reducer';
+import { getUserData } from '../../store/user/selectors';
+import { IUserState } from '../../store/user/reducer';
+import IsLoggedIn from '../../components/helpers/isLoggedIn';
 
 interface DashboardProps {
 	date: string;
 	setModal: Function;
+	userData: IUserState;
 }
 
 const mapStateToProps = (state) => ({
-	date: getGlobalDate(state)
+	date: getGlobalDate(state),
+	userData: getUserData(state)
 });
 
 const mapDispatchToProps = {
@@ -24,7 +29,7 @@ const mapDispatchToProps = {
 };
 
 interface DashboardNaturePanelProps {
-	iconKey: 'bug' | 'fish';
+	iconKey: 'bug' | 'fish' | 'deepsea';
 	modal: MODAL_OPTIONS;
 	title: string;
 	data: any[];
@@ -33,27 +38,29 @@ const DashboardNaturePanel = ({ title, iconKey, data, modal }: DashboardNaturePa
 	const dispatch = useDispatch();
 
 	return (
-		<Panel header={title} toggleable={IS_MOBILE} className="dashboard-card card p-col-12 p-md-4 p-lg-3">
-			<Feed>
-				{data.map((f) => (
-					<FeedItem key={f.Name} onClick={() => dispatch(setModal(modal, f.Name))}>
-						<NatureIcon Type={iconKey} Name={f.Name} Size="Small" />
-						<div>{f.Name}</div>
-					</FeedItem>
-				))}
-			</Feed>
-		</Panel>
+		<div className="p-col-12 p-md-4 p-lg-3">
+			<Panel header={title} toggleable={IS_MOBILE} className="dashboard-card card">
+				<Feed>
+					{data.map((f) => (
+						<FeedItem key={f.Name} onClick={() => dispatch(setModal(modal, f.Name))}>
+							<NatureIcon Type={iconKey} Name={f.Name} Size="Small" />
+							<div style={{ marginLeft: '8px' }}>{f.Name}</div>
+						</FeedItem>
+					))}
+				</Feed>
+			</Panel>
+		</div>
 	);
 };
-const Dashboard = ({ date, setModal }: DashboardProps) => {
+const Dashboard = ({ date, setModal, userData }: DashboardProps) => {
 	const service = new CalenderService(date);
-	const { Bugs, Fishes, Villagers, Events } = service.getAll(true);
+	const { Bugs, Fishes, Villagers, Events, DeepSea } = service.getAll(true);
 	const cardClasses = 'dashboard-card card p-col-12';
 
 	return (
 		<div className="p-grid p-justify-even">
 			<div className="p-col-12 p-md-3 p-lg-3">
-				<div className="p-grid">
+				<div className="p-grid ">
 					<Panel header="Today's Birthdays" className={cardClasses}>
 						<Feed>
 							{Villagers.map((f, i) => (
@@ -71,6 +78,26 @@ const Dashboard = ({ date, setModal }: DashboardProps) => {
 					</Panel>
 				</div>
 			</div>
+			<IsLoggedIn>
+				<DashboardNaturePanel
+					title="Available Uncaught Fishes"
+					data={Fishes.filter((f) => userData.NewLeaf.Catalogued.Fishes.indexOf(f.Name) <= 0)}
+					iconKey="fish"
+					modal={MODAL_OPTIONS.Fish}
+				/>
+				<DashboardNaturePanel
+					title="Available Uncaught Bugs"
+					data={Bugs.filter((f) => userData.NewLeaf.Catalogued.Bugs.indexOf(f.Name) <= 0)}
+					iconKey="fish"
+					modal={MODAL_OPTIONS.Bug}
+				/>
+				<DashboardNaturePanel
+					title="Available Uncaught Deep Sea Finds"
+					data={Bugs.filter((f) => userData.NewLeaf.Catalogued.DeepSea.indexOf(f.Name) <= 0)}
+					iconKey="deepsea"
+					modal={MODAL_OPTIONS.DeepSea}
+				/>
+			</IsLoggedIn>
 			<DashboardNaturePanel
 				title="Today's Mainland Fishes"
 				data={Fishes.filter((f) => f.Location !== 'Island')}
@@ -82,6 +109,12 @@ const Dashboard = ({ date, setModal }: DashboardProps) => {
 				data={Bugs.filter((b) => b.Location.indexOf('Island') < 0)}
 				iconKey="bug"
 				modal={MODAL_OPTIONS.Bug}
+			/>
+			<DashboardNaturePanel
+				title="Today's Deep Sea Finds"
+				data={DeepSea}
+				iconKey="deepsea"
+				modal={MODAL_OPTIONS.DeepSea}
 			/>
 		</div>
 	);

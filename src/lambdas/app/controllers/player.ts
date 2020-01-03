@@ -28,6 +28,7 @@ export class PlayerController {
 				Villagers: [],
 				Museum: {
 					Fishes: [],
+					DeepSea: [],
 					Bugs: [],
 					Art: [],
 					Fossils: []
@@ -44,7 +45,8 @@ export class PlayerController {
 					Fishes: [],
 					Bugs: [],
 					Art: [],
-					Fossils: []
+					Fossils: [],
+					DeepSea: []
 				}
 			}
 		};
