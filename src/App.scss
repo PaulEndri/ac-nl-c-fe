@@ -160,3 +160,15 @@ ul.acc-feed-container {
 		z-index: 50;
 	}
 }
+
+.dashboard-villager {
+	display: inline-block;
+	padding: 15px;
+	background-color: rgba(0, 0, 0, 0.2);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.5);
+	&:hover {
+		box-shadow: 0 1px 1px 1px black;
+		background-color: rgba(0, 0, 0, 0.8);
+	}
+}

@@ -15,7 +15,9 @@ export const getUserFurniture = (type) => (state) =>
 export const getUserClothing = (state) => (state.user.NewLeaf.Catalogued || {}).Clothing || [];
 export const getUserCatalog = (state) => state.user.NewLeaf.Catalogued;
 
+export const getUserCatalogByType = (type) => (state) => (state.user.NewLeaf.Catalogued || {})[type] || [];
 export const getUserFurnitureByType = (type) => (state) => state.user.NewLeaf.Catalogue.Furniture[type];
+export const getUserDonationsByType = (type) => (state) => (state.user.NewLeaf.Museum || {})[type] || [];
 
 export const getUserFossils = (state) => (state.user.NewLeaf.Museum ? state.user.NewLeaf.Museum.Fossils : []);
 export const getUserArt = (state) => (state.user.NewLeaf.Museum ? state.user.NewLeaf.Museum.Art : []);

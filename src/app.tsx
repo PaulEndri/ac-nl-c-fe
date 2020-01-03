@@ -15,6 +15,8 @@ import PaperView from './views/paper';
 import FlooringView from './views/flooring';
 import WallpaperView from './views/wallpaper';
 import GyroidView from './views/gyroids';
+import DashboardView from './views/dashboard';
+import AboutView from './views/about';
 
 function App() {
 	return (
@@ -31,6 +33,8 @@ function App() {
 			<Route exact path="/flooring" component={FlooringView} />
 			<Route exact path="/wallpaper" component={WallpaperView} />
 			<Route exact path="/gyroids" component={GyroidView} />
+			<Route exact path="/town" component={DashboardView} />
+			<Route exact path="/about" component={AboutView} />
 
 			{/* <Route exact path="/house/:house" component={HouseView} />
                 <Route exact path="/house/:house/character/:character" component={CharacterView} />

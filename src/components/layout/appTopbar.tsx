@@ -54,7 +54,7 @@ const AppTopbarComponent = ({ setMenuState, push }: AppTopbarProps) => {
 								)}
 							/>
 							<LightingSwitch />
-							<Button label="About & Support" icon="pi pi-question" />
+							<Button label="About & Support" icon="pi pi-question" onClick={() => push('/about')} />
 						</IsDesktop>
 					</div>
 					<IsMobile>

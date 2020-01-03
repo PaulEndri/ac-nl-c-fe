@@ -4,6 +4,7 @@ import { getUserVillagers } from '../../../store/user/selectors';
 import { connect } from 'react-redux';
 import { Button } from 'primereact/button';
 import IsLoggedIn from '../../helpers/isLoggedIn';
+import classNames from 'classnames';
 
 interface VillagerFooterProps {
 	name: string;
@@ -40,6 +41,9 @@ export const VillagerFooterComponent = ({
 	return (
 		<IsLoggedIn>
 			<Button
+				className={classNames({
+					'p-button-danger': hasVillager
+				})}
 				label={`${hasVillager ? 'Remove from' : 'Add to'} my town`}
 				icon={`pi pi-${hasVillager ? 'minus' : 'plus'}`}
 				onClick={onClick}

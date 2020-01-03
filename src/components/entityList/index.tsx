@@ -3,19 +3,14 @@ import { connect } from 'react-redux';
 import { InputText } from 'primereact/inputtext';
 import { getGlobalDate } from '../../store/global/selectors';
 import { DataView } from 'primereact/dataview';
-import { Dropdown } from 'primereact/dropdown';
 import { Panel } from 'primereact/components/panel/Panel';
 import { setModal } from '../../store/modals/actions';
 import VillagerIcon from '../villagerIcon';
 import { IVillager, IItem } from 'ac-nl-sdk';
 import NatureIcon from '../natureIcon';
 import { MODAL_OPTIONS } from '../../store/modals/reducer';
-
-const SORT_OPTIONS = [
-	{ label: 'Name', value: 'Name' },
-	{ label: 'Personality', value: 'Personality' },
-	{ label: 'Species', value: 'Species' }
-];
+import classNames from 'classnames';
+import { InputSwitch } from 'primereact/inputswitch';
 
 interface EntityListProps {
 	data: (IItem | IVillager)[];
@@ -34,25 +29,38 @@ const mapDispatchToProps = {
 };
 
 const EntityList = ({ data, dataType, title, setModal }: EntityListProps) => {
-	const [ sortKey, setSortingKey ] = useState('Name');
 	const [ filterValue, setFilterValue ] = useState('');
+	const [ locationValue, setLocationValue ] = useState('');
+	const [ showingAll, toggleAll ] = useState(true);
 
 	const EntityListDataViewHeader = (
 		<div className="p-grid">
-			<div className="p-col-12 p-md-4" style={{ textAlign: 'left' }}>
-				<Dropdown
-					options={SORT_OPTIONS}
-					value={sortKey}
-					placeholder="Sort By"
-					onChange={(e) => setSortingKey(e.value)}
-				/>
-			</div>
-			<div className="p-col-6 p-md-4">
+			{dataType === 'Villager' ? null : (
+				<div className="p-col-12 p-md-4" style={{ textAlign: 'left' }}>
+					<InputText
+						placeholder="Filter by Location"
+						onKeyUp={(event) => setLocationValue(event.currentTarget.value)}
+					/>
+				</div>
+			)}
+			<div className={classNames('p-col-12', { 'p-md-4': dataType !== 'Villager' })}>
 				<InputText
 					placeholder="Search by Name"
 					onKeyUp={(event) => setFilterValue(event.currentTarget.value)}
 				/>
 			</div>
+			{dataType === 'Villager' ? null : (
+				<div className="p-col-12 p-md-4" style={{ textAlign: 'right' }}>
+					<div style={{ display: 'flex' }}>
+						<span className="p-col-10">{showingAll ? 'Show Current' : 'Show All'}</span>
+						<InputSwitch
+							checked={showingAll}
+							onChange={() => toggleAll(!showingAll)}
+							style={{ marginTop: '10px' }}
+						/>
+					</div>
+				</div>
+			)}
 		</div>
 	);
 
@@ -98,10 +106,19 @@ const EntityList = ({ data, dataType, title, setModal }: EntityListProps) => {
 
 	const EntityListDataViewTemplate = dataType === 'Villager' ? VillagerDataViewTemplate : ItemDataViewTemplate;
 
-	const entityData = !(filterValue && filterValue.length >= 1)
+	let entityData = data;
+
+	if (!showingAll && dataType !== 'Villager') {
+		// do some shit to turn entityData into limited by Time and Month;
+	}
+
+	entityData = !(filterValue && filterValue.length >= 1)
 		? data.map((d) => ({ ...d }))
 		: data.filter((v) => v.Name.toLowerCase().includes(filterValue.toLowerCase()));
 
+	entityData = !(locationValue && locationValue.length >= 1)
+		? entityData
+		: entityData.filter((v: any) => v.Location.toLowerCase().includes(locationValue.toLowerCase()));
 	return (
 		<div className="p-grid">
 			<div className="card card-w-title p-col-12">
@@ -111,7 +128,7 @@ const EntityList = ({ data, dataType, title, setModal }: EntityListProps) => {
 					itemTemplate={EntityListDataViewTemplate}
 					header={EntityListDataViewHeader}
 					sortOrder={1}
-					sortField={sortKey}
+					sortField="Name"
 				/>
 			</div>
 		</div>

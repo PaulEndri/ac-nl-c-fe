@@ -9,6 +9,7 @@ import { MODAL_OPTIONS } from '../../store/modals/reducer';
 import VillagerModal from './villager';
 import FishModal from './fishModal';
 import UserModal from './userModal';
+import BugModal from './bugModal';
 
 interface modalComponentProps {
 	activeModal: MODAL_OPTIONS;
@@ -37,11 +38,15 @@ const Modals = ({ modalKey, activeModal, setModal }: modalComponentProps) => (
 				<React.Fragment>
 					{activeModal === MODAL_OPTIONS.User && <UserModal.Footer />}
 					{activeModal === MODAL_OPTIONS.Villager && <VillagerModal.Footer name={modalKey} />}
+					{activeModal === MODAL_OPTIONS.Fish && <FishModal.Footer name={modalKey} />}
+					{activeModal === MODAL_OPTIONS.Bug && <BugModal.Footer name={modalKey} />}
 				</React.Fragment>
 			}
 		>
 			{activeModal === MODAL_OPTIONS.Villager && <VillagerModal.Component villagerName={modalKey} />}
-			{activeModal === MODAL_OPTIONS.Fish && <FishModal Name={modalKey} />}
+			{activeModal === MODAL_OPTIONS.Fish && <FishModal.Component name={modalKey} />}
+			{activeModal === MODAL_OPTIONS.Bug && <BugModal.Component name={modalKey} />}
+
 			{activeModal === MODAL_OPTIONS.User && <UserModal.Component />}
 		</Dialog>
 	</div>
