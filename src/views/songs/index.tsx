@@ -9,8 +9,8 @@ import { getRouterQuery } from '../../store/router/selector';
 interface Props {
 	userFurniture?: string[];
 	isLoggedIn: boolean;
-	addCatalogFurnitureRecord: Function;
-	removeCatalogFurnitureRecord: Function;
+	addCatalogRecord: Function;
+	removeCatalogRecord: Function;
 	query: any;
 }
 
@@ -41,20 +41,15 @@ const COLUMNS = [
 	}
 ];
 
-const SongViewComponent = ({
-	isLoggedIn,
-	userFurniture,
-	addCatalogFurnitureRecord,
-	removeCatalogFurnitureRecord
-}: Props) => {
+const SongViewComponent = ({ isLoggedIn, userFurniture, addCatalogRecord, removeCatalogRecord }: Props) => {
 	let title = 'List of Flooring';
 
 	return (
 		<ListView
 			data={Songs}
 			userRecords={userFurniture}
-			addRecord={(record) => (isLoggedIn ? addCatalogFurnitureRecord('Songs', record) : null)}
-			removeRecord={(record) => (isLoggedIn ? removeCatalogFurnitureRecord('Songs', record) : null)}
+			addRecord={(record) => (isLoggedIn ? addCatalogRecord('Songs', record) : null)}
+			removeRecord={(record) => (isLoggedIn ? removeCatalogRecord('Songs', record) : null)}
 			saveTitle={isLoggedIn ? 'Collected' : null}
 			columns={COLUMNS}
 			title={title}
