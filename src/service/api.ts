@@ -143,40 +143,7 @@ export class ApiService {
 			return await response.json();
 		} catch (e) {
 			console.log(e);
-			return {
-				Name: 'Offline User',
-				Email: 'nobody@knows',
-				GoogleId: '666',
-				NewLeaf: {
-					TownName: 'BlackHole',
-					FriendCode: '0000-0000-0000',
-					Projects: [],
-					Villagers: [],
-					Museum: {
-						Fishes: [],
-						DeepSea: [],
-						Bugs: [],
-						Art: [],
-						Fossils: []
-					},
-					Catalogued: {
-						Furniture: {
-							Furniture: [],
-							Wallpapers: [],
-							Flooring: [],
-							Paper: [],
-							Gyroids: []
-						},
-						Clothing: [],
-						Fishes: [],
-						Bugs: [],
-						Art: [],
-						Fossils: [],
-						DeepSea: [],
-						Songs: []
-					}
-				}
-			};
+			return null;
 		}
 	}
 
