@@ -1,8 +1,8 @@
 import React from 'react';
 import { Songs } from 'ac-nl-sdk';
-import { getUserLoggedInStatus, getUserFurniture } from '../../store/user/selectors';
+import { getUserLoggedInStatus, getUserCatalogByType } from '../../store/user/selectors';
 import { connect } from 'react-redux';
-import { addCatalogFurnitureRecord, removeCatalogFurnitureRecord } from '../../store/user/actions';
+import { addCatalogRecord, removeCatalogRecord } from '../../store/user/actions';
 import ListView from '../../components/listView';
 import { getRouterQuery } from '../../store/router/selector';
 
@@ -16,13 +16,13 @@ interface Props {
 
 const mapStateToProps = (state) => ({
 	isLoggedIn: getUserLoggedInStatus(state),
-	userFurniture: getUserFurniture('Songs')(state),
+	userFurniture: getUserCatalogByType('Songs')(state),
 	query: getRouterQuery(state)
 });
 
 const mapDispatchToProps = {
-	addCatalogFurnitureRecord,
-	removeCatalogFurnitureRecord
+	addCatalogRecord,
+	removeCatalogRecord
 };
 
 const COLUMNS = [
