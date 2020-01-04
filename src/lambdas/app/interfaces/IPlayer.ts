@@ -1,6 +1,7 @@
 export interface ISaveData {
 	TownName: string;
 	Villagers: string[];
+	Projects: string[];
 	Museum: {
 		Fishes: string[];
 		Bugs: string[];
@@ -22,6 +23,7 @@ export interface ISaveData {
 		Art: string[];
 		Fossils: string[];
 		DeepSea: string[];
+		Songs: [];
 	};
 }
 export interface IPlayer {

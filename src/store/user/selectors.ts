@@ -8,7 +8,8 @@ export const getUserCore = (state) => ({
 });
 
 export const getUserData = (state) => state.user;
-export const getUserVillagers = (state) => state.user.NewLeaf.Villagers;
+export const getUserVillagers = (state) => state.user.NewLeaf.Villagers || [];
+export const getUserProjects = (state) => state.user.NewLeaf.Projects || [];
 export const getUserDonations = (state) => state.user.NewLeaf.Museum;
 export const getUserFurniture = (type) => (state) =>
 	((state.user.NewLeaf.Catalogued || {}).Furniture || {})[type] || [];

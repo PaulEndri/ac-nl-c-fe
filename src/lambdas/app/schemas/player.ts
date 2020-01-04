@@ -7,6 +7,7 @@ export interface IPlayerModel extends IPlayer, Document {}
 export const SaveDataSchema = new Schema({
 	TownName: Types.String,
 	Villagers: [ Types.String ],
+	Works: [ Types.String ],
 	Museum: {
 		Fishes: [ Types.String ],
 		Bugs: [ Types.String ],
@@ -27,7 +28,8 @@ export const SaveDataSchema = new Schema({
 		Bugs: [ Types.String ],
 		Art: [ Types.String ],
 		Fossils: [ Types.String ],
-		DeepSea: [ Types.String ]
+		DeepSea: [ Types.String ],
+		Songs: [ Types.String ]
 	}
 });
 

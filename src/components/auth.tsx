@@ -7,6 +7,7 @@ import { getUserLoggedInStatus } from '../store/user/selectors';
 import { setUserData } from '../store/user/actions';
 import ApiService from '../service/api';
 import { push } from 'connected-react-router';
+import { initialUserState } from '../store/user/reducer';
 
 interface AuthProps {
 	isLoggedIn: boolean;
@@ -61,38 +62,7 @@ class AuthComponent extends React.Component<AuthProps, AuthState> {
 	handleGoogleLogout() {
 		document.cookie = `${AUTH_COOKIE}=;expires=${new Date(0)}`;
 
-		this.props.setUserData({
-			Email: null,
-			GoogleId: null,
-			Name: null,
-			NewLeaf: {
-				TownName: null,
-				Villagers: [],
-				Museum: {
-					Fishes: [],
-					DeepSea: [],
-					Bugs: [],
-					Art: [],
-					Fossils: []
-				},
-				Catalogued: {
-					Furniture: {
-						Furniture: [],
-						Wallpapers: [],
-						Flooring: [],
-						Paper: [],
-						Gyroids: []
-					},
-					Clothing: [],
-					Fishes: [],
-					Bugs: [],
-					Art: [],
-					Fossils: [],
-					DeepSea: []
-				}
-			},
-			isLoggedIn: false
-		});
+		this.props.setUserData(initialUserState);
 
 		this.props.push('/');
 	}

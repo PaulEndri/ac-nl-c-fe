@@ -1,5 +1,5 @@
 import React from 'react';
-import { Wallpapers } from 'ac-nl-sdk';
+import { Songs } from 'ac-nl-sdk';
 import { getUserLoggedInStatus, getUserFurniture } from '../../store/user/selectors';
 import { connect } from 'react-redux';
 import { addCatalogFurnitureRecord, removeCatalogFurnitureRecord } from '../../store/user/actions';
@@ -16,7 +16,7 @@ interface Props {
 
 const mapStateToProps = (state) => ({
 	isLoggedIn: getUserLoggedInStatus(state),
-	userFurniture: getUserFurniture('Wallpapers')(state),
+	userFurniture: getUserFurniture('Songs')(state),
 	query: getRouterQuery(state)
 });
 
@@ -33,30 +33,6 @@ const COLUMNS = [
 		filter: true
 	},
 	{
-		field: 'Theme',
-		header: 'Theme',
-		sortable: true,
-		filter: true
-	},
-	{
-		field: 'Style',
-		header: 'Style',
-		sortable: true,
-		filter: true
-	},
-	{
-		field: 'Color',
-		header: 'Color',
-		sortable: true,
-		filter: true
-	},
-	{
-		field: 'Source',
-		header: 'Source',
-		sortable: true,
-		filter: true
-	},
-	{
 		field: 'Price',
 		header: 'Price',
 		sortable: false,
@@ -65,20 +41,20 @@ const COLUMNS = [
 	}
 ];
 
-const WallpaperViewComponent = ({
+const SongViewComponent = ({
 	isLoggedIn,
 	userFurniture,
 	addCatalogFurnitureRecord,
 	removeCatalogFurnitureRecord
 }: Props) => {
-	let title = 'List of Wallpaper';
+	let title = 'List of Flooring';
 
 	return (
 		<ListView
-			data={Wallpapers}
+			data={Songs}
 			userRecords={userFurniture}
-			addRecord={(record) => (isLoggedIn ? addCatalogFurnitureRecord('Wallpapers', record) : null)}
-			removeRecord={(record) => (isLoggedIn ? removeCatalogFurnitureRecord('Wallpapers', record) : null)}
+			addRecord={(record) => (isLoggedIn ? addCatalogFurnitureRecord('Songs', record) : null)}
+			removeRecord={(record) => (isLoggedIn ? removeCatalogFurnitureRecord('Songs', record) : null)}
 			saveTitle={isLoggedIn ? 'Collected' : null}
 			columns={COLUMNS}
 			title={title}
@@ -87,5 +63,5 @@ const WallpaperViewComponent = ({
 	);
 };
 
-export const WallpaperView = connect(mapStateToProps, mapDispatchToProps)(WallpaperViewComponent);
-export default WallpaperView;
+export const SongView = connect(mapStateToProps, mapDispatchToProps)(SongViewComponent);
+export default SongView;

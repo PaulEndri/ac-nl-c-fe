@@ -16,6 +16,7 @@ export class ApiService {
 				GoogleId: '666',
 				NewLeaf: {
 					TownName: 'BlackHole',
+					Projects: [],
 					Villagers: [],
 					Museum: {
 						Fishes: [],
@@ -37,7 +38,8 @@ export class ApiService {
 						Bugs: [],
 						Art: [],
 						Fossils: [],
-						DeepSea: []
+						DeepSea: [],
+						Songs: []
 					}
 				}
 			};

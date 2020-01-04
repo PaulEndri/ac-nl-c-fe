@@ -80,8 +80,10 @@ const Layout: React.FC<LayoutProps> = ({ children, menuState, isLoggedIn, setMen
 				{ label: 'Furniture', command: () => push('/furniture') },
 				{ label: 'Wallpaper', command: () => push('/wallpaper') },
 				{ label: 'Flooring', command: () => push('/flooring') },
+				{ label: 'Songs', command: () => push('/songs') },
 				{ label: 'Gyroids', command: () => push('/gyroids') },
-				{ label: 'Paper', command: () => push('/paper') }
+				{ label: 'Paper', command: () => push('/paper') },
+				{ label: 'Public Works', command: () => push('/projects') }
 			]
 		}
 	];

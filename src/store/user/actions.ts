@@ -9,6 +9,8 @@ export const setUserData = createAction('SET_USER_DATA', (data: Partial<IPlayer>
 
 export const addUserVillager = createAction('ADD_USER_VILLAGER', (name: string) => ({ name }))();
 export const removeUserVillager = createAction('REMOVE_USER_VILLAGER', (name: string) => ({ name }))();
+export const addUserProjects = createAction('ADD_USER_PROJECTS', (name: string) => ({ name }))();
+export const removeUserProjects = createAction('REMOVE_USER_PROJECTS', (name: string) => ({ name }))();
 
 export const addMuseumRecord = createAction('ADD_USER_MUSEUM_RECORD', (key: string, name: string) => ({
 	name,

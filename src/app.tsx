@@ -19,30 +19,31 @@ import DashboardView from './views/dashboard';
 import AboutView from './views/about';
 import AccountView from './views/account';
 import DeepSeaView from './views/deepsea';
+import SongView from './views/songs';
+import ProjectsView from './views/projects';
 
-function App() {
-	return (
-		<Layout>
-			<Route exact path="/" component={Home} />
-			<Route exact path="/villagers" component={VillagersView} />
-			<Route exact path="/fishes" component={FishesView} />
-			<Route exact path="/bugs" component={BugsView} />
-			<Route exact path="/fossils" component={FossilsView} />
-			<Route exact path="/art" component={ArtView} />
-			<Route exact path="/clothing" component={ClothingView} />
-			<Route exact path="/furniture" component={FurnitureView} />
-			<Route exact path="/paper" component={PaperView} />
-			<Route exact path="/flooring" component={FlooringView} />
-			<Route exact path="/wallpaper" component={WallpaperView} />
-			<Route exact path="/gyroids" component={GyroidView} />
-			<Route exact path="/town" component={DashboardView} />
-			<Route exact path="/about" component={AboutView} />
-			<Route exact path="/account" component={AccountView} />
-			<Route exact path="/deepSea" component={DeepSeaView} />
-
-			<Persistance />
-		</Layout>
-	);
-}
+const App = () => (
+	<Layout>
+		<Route exact path="/" component={Home} />
+		<Route exact path="/villagers" component={VillagersView} />
+		<Route exact path="/fishes" component={FishesView} />
+		<Route exact path="/bugs" component={BugsView} />
+		<Route exact path="/fossils" component={FossilsView} />
+		<Route exact path="/art" component={ArtView} />
+		<Route exact path="/clothing" component={ClothingView} />
+		<Route exact path="/furniture" component={FurnitureView} />
+		<Route exact path="/paper" component={PaperView} />
+		<Route exact path="/flooring" component={FlooringView} />
+		<Route exact path="/wallpaper" component={WallpaperView} />
+		<Route exact path="/gyroids" component={GyroidView} />
+		<Route exact path="/town" component={DashboardView} />
+		<Route exact path="/about" component={AboutView} />
+		<Route exact path="/account" component={AccountView} />
+		<Route exact path="/deepSea" component={DeepSeaView} />
+		<Route exact path="/songs" component={SongView} />
+		<Route exact path="/projects" component={ProjectsView} />
+		<Persistance />
+	</Layout>
+);
 
 export default App;

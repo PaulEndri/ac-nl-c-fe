@@ -33,8 +33,20 @@ const COLUMNS = [
 		filter: true
 	},
 	{
-		field: 'HHA Themes',
-		header: 'HHA Themes',
+		field: 'Theme',
+		header: 'Theme',
+		sortable: true,
+		filter: true
+	},
+	{
+		field: 'Style',
+		header: 'Style',
+		sortable: true,
+		filter: true
+	},
+	{
+		field: 'Color',
+		header: 'Color',
 		sortable: true,
 		filter: true
 	},

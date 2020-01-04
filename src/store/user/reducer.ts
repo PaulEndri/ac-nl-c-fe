@@ -9,7 +9,9 @@ import {
 	removeCatalogRecord,
 	removeCatalogFurnitureRecord,
 	addUserVillager,
-	removeUserVillager
+	removeUserVillager,
+	addUserProjects,
+	removeUserProjects
 } from './actions';
 import { IPlayer } from '../../lambdas/app/interfaces/IPlayer';
 
@@ -22,33 +24,35 @@ export const initialUserState: IUserState = {
 	Email: '',
 	GoogleId: '',
 	Name: '',
-    NewLeaf: {
-        TownName: null,
-        Villagers: [],
-        Museum: {
-            Fishes: [],
-            DeepSea: [],
-            Bugs: [],
-            Art: [],
-            Fossils: []
-        },
-        Catalogued: {
-            Furniture: {
-                Furniture: [],
-                Wallpapers: [],
-                Flooring: [],
-                Paper: [],
-                Gyroids: []
-            },
-            Clothing: [],
-            Fishes: [],
-            Bugs: [],
-            Art: [],
-            Fossils: [],
-            DeepSea: []
-        }
-    },
-    lastUpdated: null,
+	NewLeaf: {
+		TownName: null,
+		Projects: [],
+		Villagers: [],
+		Museum: {
+			Fishes: [],
+			DeepSea: [],
+			Bugs: [],
+			Art: [],
+			Fossils: []
+		},
+		Catalogued: {
+			Furniture: {
+				Furniture: [],
+				Wallpapers: [],
+				Flooring: [],
+				Paper: [],
+				Gyroids: []
+			},
+			Clothing: [],
+			Fishes: [],
+			Bugs: [],
+			Art: [],
+			Fossils: [],
+			DeepSea: [],
+			Songs: []
+		}
+	},
+	lastUpdated: null,
 	isLoggedIn: false
 };
 
@@ -70,6 +74,18 @@ export const userReducer = createReducer(initialUserState)
 			NewLeaf: {
 				...state.NewLeaf,
 				Villagers: record.indexOf(payload.name) < 0 ? [ ...record, payload.name ] : record
+			}
+		};
+	})
+	.handleAction(addUserProjects, (state, { payload }) => {
+		const record = state.NewLeaf.Projects || [];
+
+		return {
+			...state,
+			lastUpdated: new Date(),
+			NewLeaf: {
+				...state.NewLeaf,
+				Projects: record.indexOf(payload.name) < 0 ? [ ...record, payload.name ] : record
 			}
 		};
 	})
@@ -130,6 +146,18 @@ export const userReducer = createReducer(initialUserState)
 			NewLeaf: {
 				...state.NewLeaf,
 				Villagers: record.indexOf(payload.name) < 0 ? record : record.filter((r) => r !== payload.name)
+			}
+		};
+	})
+	.handleAction(removeUserProjects, (state, { payload }) => {
+		const record = state.NewLeaf.Projects || [];
+
+		return {
+			...state,
+			lastUpdated: new Date(),
+			NewLeaf: {
+				...state.NewLeaf,
+				Projects: record.indexOf(payload.name) < 0 ? record : record.filter((r) => r !== payload.name)
 			}
 		};
 	})
