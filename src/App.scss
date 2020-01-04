@@ -196,3 +196,19 @@ ul.acc-feed-container {
 		background-color: rgba(0, 0, 0, 0.8);
 	}
 }
+
+.acc-dashboard-input {
+	.p-button {
+		margin-top: -5px;
+	}
+	&.mobile-adjust {
+		input.p-inputtext {
+			width: 100%;
+			margin-right: -2.28rem;
+		}
+	}
+
+	.p-disabled {
+		opacity: 1 !important;
+	}
+}

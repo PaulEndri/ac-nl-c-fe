@@ -1,5 +1,6 @@
 export interface ISaveData {
 	TownName: string;
+	FriendCode: string;
 	Villagers: string[];
 	Projects: string[];
 	Museum: {

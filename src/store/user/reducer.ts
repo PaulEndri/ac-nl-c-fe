@@ -26,6 +26,7 @@ export const initialUserState: IUserState = {
 	Name: '',
 	NewLeaf: {
 		TownName: null,
+		FriendCode: '',
 		Projects: [],
 		Villagers: [],
 		Museum: {

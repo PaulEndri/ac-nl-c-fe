@@ -18,19 +18,6 @@ export const AppMenu = ({ model, push }: Props) => (
 				<IsMobile>
 					<div className="layout-menu-title">Account</div>
 					<ul className="layout-menu layout-mainmenu clearfix">
-						<IsLoggedIn>
-							<li>
-								<a
-									href="#/"
-									style={{ width: '100%' }}
-									className="logout-button"
-									onClick={() => push('/account')}
-								>
-									<i className="fas fa-user" />
-									<span>My Account</span>
-								</a>
-							</li>
-						</IsLoggedIn>
 						<Auth
 							LoginButton={(renderProps) => (
 								<li>

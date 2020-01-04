@@ -16,9 +16,10 @@ const router = new KoaRouter({
 });
 const controller = new PlayerController();
 
-// Only three routes, we can handle it for now.
+// Only four routes, we can handle it for now.
 router
 	.get('/', (ctx) => (ctx.body = 'HELLO'))
+	.get('/player/town/:id', controller.getById)
 	.get('/player/:email', controller.get)
 	.post('/player', controller.create)
 	.put('/player/:email', controller.update);

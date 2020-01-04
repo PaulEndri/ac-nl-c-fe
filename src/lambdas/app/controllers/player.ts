@@ -16,6 +16,20 @@ export class PlayerController {
 		}
 	}
 
+	async getById(ctx: Context) {
+		const { id } = ctx.params;
+
+		const results = await Players.findOne({
+			GoogleId: id
+		});
+
+		if (results) {
+			ctx.body = results.toObject();
+		} else {
+			ctx.throw(404, `User with ID ${id} not found`);
+		}
+	}
+
 	async create(ctx: Context) {
 		const { playerName, townName, googleId, email } = ctx.request.body;
 

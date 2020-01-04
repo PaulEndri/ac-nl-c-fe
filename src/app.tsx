@@ -21,6 +21,7 @@ import AccountView from './views/account';
 import DeepSeaView from './views/deepsea';
 import SongView from './views/songs';
 import ProjectsView from './views/projects';
+import TownView from './views/town';
 
 const App = () => (
 	<Layout>
@@ -42,6 +43,8 @@ const App = () => (
 		<Route exact path="/deepSea" component={DeepSeaView} />
 		<Route exact path="/songs" component={SongView} />
 		<Route exact path="/projects" component={ProjectsView} />
+		<Route exact path="/town/:id" component={TownView} />
+
 		<Persistance />
 	</Layout>
 );

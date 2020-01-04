@@ -97,18 +97,6 @@ const Layout: React.FC<LayoutProps> = ({ children, menuState, isLoggedIn, setMen
 				command: () => push('/town')
 			}
 		];
-
-		if (!IS_MOBILE) {
-			menuData = [
-				menuData[0],
-				{
-					label: 'My Account',
-					command: () => push('/account'),
-					icon: 'fas fa-user'
-				},
-				...menuData.slice(1)
-			];
-		}
 	}
 
 	return (

@@ -23,13 +23,40 @@ const mapDispatchToProps = {
 
 const AccountViewComponent = ({ coreData, update, saving }: Props) => (
 	<div className="p-grid p-fluid">
-		<div className="p-col-12 p-md-6">
+		<div className="p-col-12 ">
 			<div className="card card-w-title">
-				<h1>Name</h1>
-				<span className="p-float-label">
-					<InputText value={coreData.Name || ''} onChange={(e) => update({ Name: e.currentTarget.value })} />
-					<label htmlFor="mayorName">Mayor Name</label>
-				</span>
+				<div className="p-grid">
+					<div className="p-col-3">
+						<h1>Name</h1>
+						<span className="p-float-label">
+							<InputText
+								value={coreData.Name || ''}
+								onChange={(e) => update({ Name: e.currentTarget.value })}
+							/>
+							<label htmlFor="mayorName">Mayor Name</label>
+						</span>
+					</div>
+					<div className="p-col-3">
+						<h1>Name</h1>
+						<span className="p-float-label">
+							<InputText
+								value={coreData.Name || ''}
+								onChange={(e) => update({ Name: e.currentTarget.value })}
+							/>
+							<label htmlFor="mayorName">Mayor Name</label>
+						</span>
+					</div>
+					<div className="p-col-6">
+						<h1>Name</h1>
+						<span className="p-float-label">
+							<InputText
+								value={coreData.Name || ''}
+								onChange={(e) => update({ Name: e.currentTarget.value })}
+							/>
+							<label htmlFor="mayorName">Mayor Name</label>
+						</span>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div className="p-col-12 p-md-6">

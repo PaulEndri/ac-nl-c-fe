@@ -8,6 +8,7 @@ export const SaveDataSchema = new Schema({
 	TownName: Types.String,
 	Villagers: [ Types.String ],
 	Projects: [ Types.String ],
+	FriendCode: [ Types.String ],
 	Museum: {
 		Fishes: [ Types.String ],
 		Bugs: [ Types.String ],
@@ -39,6 +40,9 @@ export const PlayerSchema: Schema = new Schema({
 		unique: true
 	},
 	Name: Types.String,
-	Email: Types.String,
+	Email: {
+		type: Types.String,
+		unique: true
+	},
 	NewLeaf: SaveDataSchema
 });
