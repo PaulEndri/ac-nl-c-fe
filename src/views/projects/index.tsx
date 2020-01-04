@@ -73,7 +73,7 @@ const ProjectsViewComponent = ({ isLoggedIn, userProjects, removeUserProjects, a
 			userRecords={userProjects}
 			addRecord={(record) => (isLoggedIn ? addUserProjects(record) : null)}
 			removeRecord={(record) => (isLoggedIn ? removeUserProjects(record) : null)}
-			saveTitle={isLoggedIn ? 'Collected' : null}
+			saveTitle={isLoggedIn ? 'Built' : null}
 			columns={COLUMNS}
 			title={title}
 			paginator={true}
