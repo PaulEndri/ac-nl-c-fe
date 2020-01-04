@@ -78,7 +78,6 @@ const TownPanel = ({ currentValue, totalValue, title }: PanelProps) => {
 export const Town = ({ userData, setUserData, disabled }: Props) => {
 	const dispatch = useDispatch();
 	let growl: any = createRef();
-	let href: any = createRef();
 
 	if (!userData) {
 		return null;
@@ -100,7 +99,8 @@ export const Town = ({ userData, setUserData, disabled }: Props) => {
 	};
 
 	const copyToClipboard = (e) => {
-		href.select();
+		const el: any = document.querySelector('#pr_id_3_content > div > input.p-inputtext.p-component.p-filled');
+		el.select();
 		document.execCommand('copy');
 		e.target.focus();
 		growl.current.show({
@@ -172,34 +172,33 @@ export const Town = ({ userData, setUserData, disabled }: Props) => {
 				</Panel>
 			</div>
 
-			<div className="p-col-12">
-				<Panel header="Shareable Link" className="card">
-					<p>
-						Want to share your town? The link below will allow people to look at a read only verison of this
-						page!
-					</p>
-					<div>
-						<InputText
-							style={{ width: IS_MOBILE ? '100%' : '90%', marginTop: '10px' }}
-							disabled
-							value={`https://newleaf.accompanion.net/town/${userData.GoogleId}`}
-						/>
-						<input
-							ref={(el) => (href = el)}
-							style={{ display: 'none' }}
-							value={`https://newleaf.accompanion.net/town/${userData.GoogleId}`}
-						/>
-						{document.queryCommandSupported && (
-							<Button
-								style={{ marginTop: IS_MOBILE ? '3px' : '-3px', width: IS_MOBILE ? '100%' : 'auto' }}
-								icon="fas fa-clipboard-check"
-								label={IS_MOBILE ? 'Copy to Clipboard' : ''}
-								onClick={copyToClipboard}
+			{!disabled && (
+				<div className="p-col-12">
+					<Panel header="Shareable Link" className="card">
+						<p>
+							Want to share your town? The link below will allow people to look at a read only verison of
+							this page!
+						</p>
+						<div>
+							<InputText
+								style={{ width: IS_MOBILE ? '100%' : '90%', marginTop: '10px' }}
+								value={`https://newleaf.accompanion.net/town/${userData.GoogleId}`}
 							/>
-						)}
-					</div>
-				</Panel>
-			</div>
+							{document.queryCommandSupported && (
+								<Button
+									style={{
+										marginTop: IS_MOBILE ? '3px' : '-3px',
+										width: IS_MOBILE ? '100%' : 'auto'
+									}}
+									icon="fas fa-clipboard-check"
+									label={IS_MOBILE ? 'Copy to Clipboard' : ''}
+									onClick={copyToClipboard}
+								/>
+							)}
+						</div>
+					</Panel>
+				</div>
+			)}
 			<div className="p-col-12">
 				<Panel toggleable={true} header="My Villagers" className="card">
 					{getVillagers(Villagers).map((v) => (

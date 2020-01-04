@@ -1,9 +1,5 @@
 import React from 'react';
-import { getUserData } from '../../store/user/selectors';
 import { IPlayer } from '../../lambdas/app/interfaces/IPlayer';
-import { connect } from 'react-redux';
-import IsLoggedIn from '../../components/helpers/isLoggedIn';
-import { setUserData } from '../../store/user/actions';
 import Town from '../../components/town';
 import { RouteComponentProps } from 'react-router-dom';
 import ApiService from '../../service/api';
