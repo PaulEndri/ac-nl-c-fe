@@ -4,13 +4,15 @@ import EntityListView from '../../components/entityList';
 import { MODAL_OPTIONS } from '../../store/modals/reducer';
 import { Panel } from 'primereact/components/panel/Panel';
 import { Dropdown } from 'primereact/dropdown';
-import { formatNumber } from '../../utils/formatNumber';
 import { IPlayer } from '../../lambdas/app/interfaces/IPlayer';
 import { getUserData } from '../../store/user/selectors';
 import { connect } from 'react-redux';
 import IsLoggedIn from '../../components/helpers/isLoggedIn';
-import { MONTHS } from '../../consts';
+import { MONTH_OPTIONS, TIME_OPTIONS, TRACKED_OPTIONS } from '../../consts';
 import { InputText } from 'primereact/inputtext';
+import { TRACKED_FILTER_VALUES } from '../../utils/misc';
+import MassNatureUpdate from '../../components/massNatureUpdate';
+import { Button } from 'primereact/button';
 
 interface Props {
 	userData: IPlayer;
@@ -20,23 +22,6 @@ const mapStateToProps = (state) => ({
 	userData: getUserData(state)
 });
 
-enum TRACKED_FILTER_VALUES {
-	'EMPTY' = 0,
-	'PRESENT' = 1,
-	'MISSING' = 2
-}
-
-const MONTH_OPTIONS = MONTHS.map((m, i) => ({ value: i + 1, label: m }));
-const TIME_OPTIONS = new Array(24).fill(1).map((_, i) => ({
-	value: i + 1,
-	label: formatNumber(i + 1)
-}));
-const TRACKED_OPTIONS = [
-	{ label: '', value: TRACKED_FILTER_VALUES.EMPTY },
-	{ label: 'Recorded', value: TRACKED_FILTER_VALUES.PRESENT },
-	{ label: 'Missing', value: TRACKED_FILTER_VALUES.MISSING }
-];
-
 const createCopy = (test: IBug[]) => test.map((v) => ({ ...v }));
 const BugsView = ({ userData }: Props) => {
 	const [ locationFilter, setLocationFilter ] = useState('');
@@ -44,6 +29,7 @@ const BugsView = ({ userData }: Props) => {
 	const [ timeFilter, setTimeFilter ] = useState(0);
 	const [ caughtFilter, setCaughtFilter ] = useState();
 	const [ donatedFilter, setDonatedFilter ] = useState();
+	const [ showMassNatureUpdate, toggleMassNatureUpdate ] = useState(false);
 
 	let data = createCopy(Bugs);
 
@@ -124,9 +110,20 @@ const BugsView = ({ userData }: Props) => {
 								showClear={true}
 							/>
 						</div>
+						<div className="p-col-6 p-md-4">
+							<h3>Toggle Mass Update View</h3>
+							<Button
+								label={'Toggle Mass Update Picklist'}
+								className="width-full"
+								onClick={() => toggleMassNatureUpdate(!showMassNatureUpdate)}
+							/>
+						</div>
 					</IsLoggedIn>
 				</div>
 			</Panel>
+			{showMassNatureUpdate && (
+				<MassNatureUpdate type="bug" source={createCopy(Bugs)} userData={userData} sourceTitle="Bugs" />
+			)}
 		</EntityListView>
 	);
 };

@@ -12,6 +12,7 @@ import { MODAL_OPTIONS } from '../../store/modals/reducer';
 import { getUserData } from '../../store/user/selectors';
 import { IUserState } from '../../store/user/reducer';
 import IsLoggedIn from '../../components/helpers/isLoggedIn';
+import { NatureSource } from '../../types/nature';
 
 interface DashboardProps {
 	date: string;
@@ -29,7 +30,7 @@ const mapDispatchToProps = {
 };
 
 interface DashboardNaturePanelProps {
-	iconKey: 'bug' | 'fish' | 'deepsea';
+	iconKey: NatureSource;
 	modal: MODAL_OPTIONS;
 	title: string;
 	data: any[];

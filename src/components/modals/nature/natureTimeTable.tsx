@@ -111,10 +111,10 @@ export const NatureTimeTable = ({ data }: Props) => {
 		);
 	} else if (IS_MOBILE && columns.length >= 14) {
 		return (
-			<ScrollPanel style={{ height: IS_MOBILE ? '50vh' : 'auto' }}>
+			<ScrollPanel style={{ height: IS_MOBILE ? '30vh' : 'auto' }}>
 				<DataTable
 					value={Object.values(rowObject)}
-					header="Earlyt Morning Availability"
+					header="Early Morning Availability"
 					style={{ marginTop: '10px' }}
 				>
 					<Column field="month" header="Month" />

@@ -3,10 +3,11 @@ import { Fishes, Bugs, INature, DeepSea, IFish } from 'ac-nl-sdk';
 import NatureIcon from '../../natureIcon';
 import { Panel } from 'primereact/components/panel/Panel';
 import NatureTimeTable from './natureTimeTable';
+import { NatureSource } from '../../../types/nature';
 
 interface NatureModalProps {
 	name: string;
-	type: 'bug' | 'fish' | 'deepsea';
+	type: NatureSource;
 }
 
 const SOURCES = {

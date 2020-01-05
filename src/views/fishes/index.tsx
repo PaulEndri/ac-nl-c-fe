@@ -2,49 +2,54 @@ import React, { useState } from 'react';
 import { Fishes, IFish } from 'ac-nl-sdk';
 import EntityListView from '../../components/entityList';
 import { MODAL_OPTIONS } from '../../store/modals/reducer';
-import { MONTHS, FISH_LOCATIONS } from '../../consts';
 import { Panel } from 'primereact/components/panel/Panel';
 import { Dropdown } from 'primereact/dropdown';
-import { formatNumber } from '../../utils/formatNumber';
+import { FISH_LOCATIONS, MONTH_OPTIONS, TIME_OPTIONS, TRACKED_OPTIONS } from '../../consts';
+
+import { TRACKED_FILTER_VALUES } from '../../utils/misc';
 import { IPlayer } from '../../lambdas/app/interfaces/IPlayer';
 import { getUserData } from '../../store/user/selectors';
 import { connect } from 'react-redux';
 import IsLoggedIn from '../../components/helpers/isLoggedIn';
+import { Button } from 'primereact/button';
+import MassNatureUpdate from '../../components/massNatureUpdate';
+import { addCatalogRecord, removeCatalogRecord, addMuseumRecord, removeMuseumRecord } from '../../store/user/actions';
 
 interface Props {
 	userData: IPlayer;
+	addCatalogRecord: Function;
+	removeCatalogRecord: Function;
+	addMuseumRecord: Function;
+	removeMuseumRecord: Function;
 }
 
 const mapStateToProps = (state) => ({
 	userData: getUserData(state)
 });
 
-enum TRACKED_FILTER_VALUES {
-	'EMPTY' = 0,
-	'PRESENT' = 1,
-	'MISSING' = 2
-}
-
-const MONTH_OPTIONS = MONTHS.map((m, i) => ({ value: i + 1, label: m }));
-const TIME_OPTIONS = new Array(24).fill(1).map((_, i) => ({
-	value: i + 1,
-	label: formatNumber(i + 1)
-}));
+const mapDispatchToProps = {
+	addCatalogRecord,
+	removeCatalogRecord,
+	addMuseumRecord,
+	removeMuseumRecord
+};
 const LOCATION_OPTIONS = FISH_LOCATIONS.map((v) => ({ value: v, label: v }));
-const TRACKED_OPTIONS = [
-	{ label: '', value: TRACKED_FILTER_VALUES.EMPTY },
-	{ label: 'Recorded', value: TRACKED_FILTER_VALUES.PRESENT },
-	{ label: 'Missing', value: TRACKED_FILTER_VALUES.MISSING }
-];
 
 const createCopy = (test: IFish[]) => test.map((v) => ({ ...v }));
 
-const FishesView = ({ userData }: Props) => {
+const FishesView = ({
+	userData,
+	addCatalogRecord,
+	removeCatalogRecord,
+	addMuseumRecord,
+	removeMuseumRecord
+}: Props) => {
 	const [ locationFilter, setLocationFilter ] = useState('');
 	const [ monthFilter, setMonthFilter ] = useState(0);
 	const [ timeFilter, setTimeFilter ] = useState(0);
 	const [ caughtFilter, setCaughtFilter ] = useState();
 	const [ donatedFilter, setDonatedFilter ] = useState();
+	const [ showMassNatureUpdate, toggleMassNatureUpdate ] = useState(false);
 
 	let data = createCopy(Fishes);
 
@@ -107,7 +112,7 @@ const FishesView = ({ userData }: Props) => {
 						/>
 					</div>
 					<IsLoggedIn>
-						<div className="p-col-6">
+						<div className="p-col-6 p-md-4">
 							<h3>Filter by Caught Status</h3>
 							<Dropdown
 								className="width-full"
@@ -117,7 +122,7 @@ const FishesView = ({ userData }: Props) => {
 								showClear={true}
 							/>
 						</div>
-						<div className="p-col-6">
+						<div className="p-col-6 p-md-4">
 							<h3>Filter by Donated Status</h3>
 							<Dropdown
 								className="width-full"
@@ -127,11 +132,22 @@ const FishesView = ({ userData }: Props) => {
 								showClear={true}
 							/>
 						</div>
+						<div className="p-col-6 p-md-4">
+							<h3>Toggle Mass Update View</h3>
+							<Button
+								label={'Toggle Mass Update Picklist'}
+								className="width-full"
+								onClick={() => toggleMassNatureUpdate(!showMassNatureUpdate)}
+							/>
+						</div>
 					</IsLoggedIn>
 				</div>
 			</Panel>
+			{showMassNatureUpdate && (
+				<MassNatureUpdate type="fish" source={createCopy(Fishes)} userData={userData} sourceTitle="Fishes" />
+			)}
 		</EntityListView>
 	);
 };
 
-export default connect(mapStateToProps, null)(FishesView);
+export default connect(mapStateToProps, mapDispatchToProps)(FishesView);

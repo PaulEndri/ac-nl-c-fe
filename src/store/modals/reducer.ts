@@ -5,7 +5,6 @@ export enum MODAL_OPTIONS {
 	Villager = 'Villager',
 	Fish = 'Fish',
 	Bug = 'Bug',
-	Item = 'Item',
 	DeepSea = 'DeepSea',
 	User = 'User'
 }

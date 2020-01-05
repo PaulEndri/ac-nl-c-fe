@@ -17,6 +17,11 @@
 .margin-auto {
 	margin: auto;
 }
+
+.margin-left-L {
+	margin-left: 10px;
+}
+
 body .layout-wrapper {
 	.topbar {
 		padding: 10px 10px;
@@ -225,4 +230,11 @@ ul.acc-feed-container {
 
 .acc-flex {
 	display: flex;
+}
+
+.p-picklist-buttons-cell {
+	button.p-button:nth-child(2),
+	button.p-button:nth-child(4) {
+		display: none !important;
+	}
 }

@@ -1,10 +1,11 @@
 import React from 'react';
 import classNames from 'classnames';
+import { NatureSource } from '../types/nature';
 
 interface NatureIconProps {
 	className?: string;
 	Name: string;
-	Type: 'bug' | 'fish' | 'deepsea';
+	Type: NatureSource;
 	Size: 'Small' | 'Regular';
 }
 
