@@ -3,6 +3,7 @@ import { Villagers, IVillager } from 'ac-nl-sdk';
 import VillagerIcon from '../../villagerIcon';
 import { IS_MOBILE } from '../../helpers/isMobile';
 import { TabView, TabPanel } from 'primereact/tabview';
+import { MONTHS } from '../../../consts';
 
 interface VillagerModalProps {
 	villagerName: string;
@@ -11,21 +12,6 @@ interface VillagerModalProps {
 interface VillagerChildrenProps {
 	villager: IVillager;
 }
-
-const MONTHS = [
-	'January',
-	'February',
-	'March',
-	'April',
-	'May',
-	'June',
-	'July',
-	'August',
-	'September',
-	'October',
-	'November',
-	'December'
-];
 
 const CoreData = ({ villager }: VillagerChildrenProps) => (
 	<div className="p-grid">

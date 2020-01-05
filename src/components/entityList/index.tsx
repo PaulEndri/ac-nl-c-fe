@@ -9,15 +9,16 @@ import VillagerIcon from '../villagerIcon';
 import { IVillager, IItem, CalenderService, IFish, IBug, IDeepSea } from 'ac-nl-sdk';
 import NatureIcon from '../natureIcon';
 import { MODAL_OPTIONS } from '../../store/modals/reducer';
-import classNames from 'classnames';
 import { InputSwitch } from 'primereact/inputswitch';
 
 interface EntityListProps {
 	data: (IItem | IVillager)[];
 	dataType: 'fish' | 'bug' | 'deepsea' | 'Villager';
+	modalType: MODAL_OPTIONS;
 	date: string;
 	setModal: Function;
 	title: string;
+	children?: any; // This shouldn't be needed, but Typescript is bitching because Entity List is being wrapped in a connect
 }
 
 const mapStateToProps = (state) => ({
@@ -28,48 +29,16 @@ const mapDispatchToProps = {
 	setModal
 };
 
-const EntityList = ({ date, data, dataType, title, setModal }: EntityListProps) => {
+const EntityList: React.FC<EntityListProps> = ({ date, data, dataType, title, modalType, setModal, children }) => {
 	const [ filterValue, setFilterValue ] = useState('');
-	const [ locationValue, setLocationValue ] = useState('');
 	const [ showingAll, toggleAll ] = useState(true);
 
-	let modalOption: MODAL_OPTIONS;
-
-	switch (dataType) {
-		case 'bug':
-			modalOption = MODAL_OPTIONS.Bug;
-			break;
-		case 'fish':
-			modalOption = MODAL_OPTIONS.Fish;
-			break;
-		case 'deepsea':
-			modalOption = MODAL_OPTIONS.DeepSea;
-			break;
-		default:
-			modalOption = MODAL_OPTIONS.Villager;
-			break;
-	}
-
 	const EntityListDataViewHeader = (
-		<div className="p-grid">
+		<div className="p-grid p-fluid">
 			{dataType === 'Villager' ? null : (
-				<div className="p-col-12 p-md-4" style={{ textAlign: 'left' }}>
-					<InputText
-						placeholder="Filter by Location"
-						onKeyUp={(event) => setLocationValue(event.currentTarget.value)}
-					/>
-				</div>
-			)}
-			<div className={classNames('p-col-12', { 'p-md-4': dataType !== 'Villager' })}>
-				<InputText
-					placeholder="Search by Name"
-					onKeyUp={(event) => setFilterValue(event.currentTarget.value)}
-				/>
-			</div>
-			{dataType === 'Villager' ? null : (
-				<div className="p-col-12 p-md-4" style={{ textAlign: 'right' }}>
-					<div style={{ display: 'flex' }}>
-						<span className="p-col-10">{showingAll ? 'Show Current' : 'Show All'}</span>
+				<div className="p-col-6 p-md-3 text-align-end">
+					<div className="acc-flex">
+						<span className="p-col-8">{showingAll ? 'Show Current' : 'Show All'}</span>
 						<InputSwitch
 							checked={!showingAll}
 							onChange={() => toggleAll(!showingAll)}
@@ -78,6 +47,13 @@ const EntityList = ({ date, data, dataType, title, setModal }: EntityListProps) 
 					</div>
 				</div>
 			)}
+			<div className="p-col-6">
+				<InputText
+					className="width-full"
+					placeholder="Search by Name"
+					onKeyUp={(event) => setFilterValue(event.currentTarget.value)}
+				/>
+			</div>
 		</div>
 	);
 
@@ -86,7 +62,7 @@ const EntityList = ({ date, data, dataType, title, setModal }: EntityListProps) 
 		dataType !== 'Villager' && (
 			<span
 				className="p-col-4 p-md-1"
-				onClick={() => setModal(modalOption, data.Name)}
+				onClick={() => setModal(modalType, data.Name)}
 				style={{
 					margin: 'auto',
 					display: 'block',
@@ -100,7 +76,7 @@ const EntityList = ({ date, data, dataType, title, setModal }: EntityListProps) 
 
 	const VillagerDataViewTemplate = (data: IVillager) =>
 		data && (
-			<span className="p-col-6 p-md-2" onClick={() => setModal(modalOption, data.Name)}>
+			<span className="p-col-6 p-md-2" onClick={() => setModal(modalType, data.Name)}>
 				<Panel
 					className="p-grid acc-selectable"
 					header={data.Name}
@@ -135,20 +111,17 @@ const EntityList = ({ date, data, dataType, title, setModal }: EntityListProps) 
 				entityData = service.getDeepSea(entityData as IDeepSea[]);
 				break;
 		}
-		// do some shit to turn entityData into limited by Time and Month;
 	}
 
 	entityData = !(filterValue && filterValue.length >= 1)
 		? entityData.map((d) => ({ ...d }))
 		: entityData.filter((v) => v.Name.toLowerCase().includes(filterValue.toLowerCase()));
 
-	entityData = !(locationValue && locationValue.length >= 1)
-		? entityData
-		: entityData.filter((v: any) => v.Location.toLowerCase().includes(locationValue.toLowerCase()));
 	return (
 		<div className="p-grid">
 			<div className="card card-w-title p-col-12">
 				<h1>{title}</h1>
+				{children}
 				<DataView
 					value={entityData}
 					itemTemplate={EntityListDataViewTemplate}

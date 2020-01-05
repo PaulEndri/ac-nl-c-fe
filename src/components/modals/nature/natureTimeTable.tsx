@@ -5,6 +5,7 @@ import { Column } from 'primereact/column';
 import { Panel } from 'primereact/components/panel/Panel';
 import { ScrollPanel } from 'primereact/scrollpanel';
 import { IS_MOBILE } from '../../helpers/isMobile';
+import { MONTHS } from '../../../consts';
 
 /**
  * @todo this file is hot garbage. Fix it.
@@ -13,21 +14,6 @@ import { IS_MOBILE } from '../../helpers/isMobile';
 interface Props {
 	data: INature;
 }
-
-const MONTHS = [
-	'January',
-	'February',
-	'March',
-	'April',
-	'May',
-	'June',
-	'July',
-	'August',
-	'October',
-	'September',
-	'November',
-	'December'
-];
 
 export const NatureTimeTable = ({ data }: Props) => {
 	let rowObject: any = {};

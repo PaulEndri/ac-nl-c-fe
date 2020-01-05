@@ -149,8 +149,18 @@ ul.acc-feed-container {
 	}
 }
 
+.text-align-left {
+	text-align: left;
+}
+.text-align-end {
+	text-align: end;
+}
 .text-align-center {
 	text-align: center;
+}
+
+.width-full {
+	width: 100% !important;
 }
 
 .acc-view-width {
@@ -211,4 +221,8 @@ ul.acc-feed-container {
 	.p-disabled {
 		opacity: 1 !important;
 	}
+}
+
+.acc-flex {
+	display: flex;
 }
