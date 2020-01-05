@@ -15,7 +15,7 @@ import AppFooter from './appFooter';
 
 interface LayoutProps {
 	menuState: boolean;
-	push: Function;
+	pushCommand: Function;
 	setMenuState: Function;
 	isLoggedIn: Function;
 }
@@ -26,11 +26,18 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-	push,
+	pushCommand: push,
 	setMenuState: setGlobalMenuAction
 };
 
-const Layout: React.FC<LayoutProps> = ({ children, menuState, isLoggedIn, setMenuState, push }) => {
+const Layout: React.FC<LayoutProps> = ({ children, menuState, isLoggedIn, setMenuState, pushCommand }) => {
+	const push = (path) => {
+		pushCommand(path);
+
+		if (IS_MOBILE) {
+			setMenuState(false);
+		}
+	};
 	let menuData: any[] = [
 		{
 			label: 'Dashboard',
