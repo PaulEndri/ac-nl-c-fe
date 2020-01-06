@@ -1,10 +1,11 @@
 import React from 'react';
 import { Songs } from 'ac-nl-sdk';
-import { getUserLoggedInStatus, getUserCatalogByType } from '../../store/user/selectors';
+import { getUserLoggedInStatus, getUserCatalogByType, getUserData } from '../../store/user/selectors';
 import { connect } from 'react-redux';
 import { addCatalogRecord, removeCatalogRecord } from '../../store/user/actions';
 import ListView from '../../components/listView';
 import { getRouterQuery } from '../../store/router/selector';
+import { IPlayer } from '../../lambdas/app/interfaces/IPlayer';
 
 interface Props {
 	userFurniture?: string[];
@@ -12,12 +13,14 @@ interface Props {
 	addCatalogRecord: Function;
 	removeCatalogRecord: Function;
 	query: any;
+	userData: IPlayer;
 }
 
 const mapStateToProps = (state) => ({
 	isLoggedIn: getUserLoggedInStatus(state),
 	userFurniture: getUserCatalogByType('Songs')(state),
-	query: getRouterQuery(state)
+	query: getRouterQuery(state),
+	userData: getUserData(state)
 });
 
 const mapDispatchToProps = {
@@ -41,11 +44,12 @@ const COLUMNS = [
 	}
 ];
 
-const SongViewComponent = ({ isLoggedIn, userFurniture, addCatalogRecord, removeCatalogRecord }: Props) => {
+const SongViewComponent = ({ userData, isLoggedIn, userFurniture, addCatalogRecord, removeCatalogRecord }: Props) => {
 	let title = 'List of Flooring';
 
 	return (
 		<ListView
+			userData={userData}
 			data={Songs}
 			userRecords={userFurniture}
 			addRecord={(record) => (isLoggedIn ? addCatalogRecord('Songs', record) : null)}
