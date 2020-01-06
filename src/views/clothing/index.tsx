@@ -1,10 +1,11 @@
 import React from 'react';
 import { Clothing } from 'ac-nl-sdk';
-import { getUserLoggedInStatus, getUserClothing } from '../../store/user/selectors';
+import { getUserLoggedInStatus, getUserClothing, getUserData } from '../../store/user/selectors';
 import { connect } from 'react-redux';
 import { addCatalogRecord, removeCatalogRecord } from '../../store/user/actions';
 import ListView from '../../components/listView';
 import { getRouterQuery } from '../../store/router/selector';
+import { IPlayer } from '../../lambdas/app/interfaces/IPlayer';
 
 interface Props {
 	userClothing?: string[];
@@ -12,9 +13,11 @@ interface Props {
 	addCatalogRecord: Function;
 	removeCatalogRecord: Function;
 	query: any;
+	userData: IPlayer;
 }
 
 const mapStateToProps = (state) => ({
+	userData: getUserData(state),
 	isLoggedIn: getUserLoggedInStatus(state),
 	userClothing: getUserClothing(state),
 	query: getRouterQuery(state)
@@ -59,23 +62,35 @@ const COLUMNS = [
 	}
 ];
 
-const ClothingViewComponent = ({ isLoggedIn, userClothing, addCatalogRecord, removeCatalogRecord, query }: Props) => {
+const ClothingViewComponent = ({
+	userData,
+	isLoggedIn,
+	userClothing,
+	addCatalogRecord,
+	removeCatalogRecord,
+	query
+}: Props) => {
 	let title = 'List of Clothing';
 	let data = Clothing;
+	let columns = COLUMNS.map((c) => c);
+
 	if (query && query.type) {
 		title = `List of ${query.type}`;
 
 		data = Clothing.filter((c) => c.Type === query.type);
+
+		columns = columns.filter((c) => c.field !== 'Type');
 	}
 
 	return (
 		<ListView
+			userData={userData}
 			data={data}
 			userRecords={userClothing}
 			addRecord={(record) => (isLoggedIn ? addCatalogRecord('Clothing', record) : null)}
 			removeRecord={(record) => (isLoggedIn ? removeCatalogRecord('Clothing', record) : null)}
 			saveTitle={isLoggedIn ? 'Collected' : null}
-			columns={COLUMNS}
+			columns={columns}
 			title={title}
 			paginator={true}
 		/>

@@ -1,20 +1,23 @@
 import React from 'react';
 import { Fossils } from 'ac-nl-sdk';
-import { getUserLoggedInStatus, getUserFossils } from '../../store/user/selectors';
+import { getUserLoggedInStatus, getUserFossils, getUserData } from '../../store/user/selectors';
 import { connect } from 'react-redux';
 import { addMuseumRecord, removeMuseumRecord } from '../../store/user/actions';
 import ListView from '../../components/listView';
+import { IPlayer } from '../../lambdas/app/interfaces/IPlayer';
 
 interface Props {
 	userFossils?: string[];
 	isLoggedIn: boolean;
 	addMuseumRecord: Function;
 	removeMuseumRecord: Function;
+	userData: IPlayer;
 }
 
 const mapStateToProps = (state) => ({
 	isLoggedIn: getUserLoggedInStatus(state),
-	userFossils: getUserFossils(state)
+	userFossils: getUserFossils(state),
+	userData: getUserData(state)
 });
 
 const mapDispatchToProps = {
@@ -41,9 +44,10 @@ const COLUMNS = [
 	}
 ];
 
-const FossilsViewComponent = ({ isLoggedIn, userFossils, addMuseumRecord, removeMuseumRecord }: Props) => {
+const FossilsViewComponent = ({ userData, isLoggedIn, userFossils, addMuseumRecord, removeMuseumRecord }: Props) => {
 	return (
 		<ListView
+			userData={userData}
 			data={Fossils}
 			userRecords={userFossils}
 			addRecord={(data) => (isLoggedIn ? addMuseumRecord('Fossils', data) : null)}

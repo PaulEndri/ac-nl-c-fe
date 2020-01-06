@@ -1,10 +1,11 @@
 import React from 'react';
 import { Furnitures } from 'ac-nl-sdk';
-import { getUserLoggedInStatus, getUserFurniture } from '../../store/user/selectors';
+import { getUserLoggedInStatus, getUserFurniture, getUserData } from '../../store/user/selectors';
 import { connect } from 'react-redux';
 import { addCatalogFurnitureRecord, removeCatalogFurnitureRecord } from '../../store/user/actions';
 import ListView from '../../components/listView';
 import { getRouterQuery } from '../../store/router/selector';
+import { IPlayer } from '../../lambdas/app/interfaces/IPlayer';
 
 interface Props {
 	userFurniture?: string[];
@@ -12,12 +13,14 @@ interface Props {
 	addCatalogFurnitureRecord: Function;
 	removeCatalogFurnitureRecord: Function;
 	query: any;
+	userData: IPlayer;
 }
 
 const mapStateToProps = (state) => ({
 	isLoggedIn: getUserLoggedInStatus(state),
 	userFurniture: getUserFurniture('Furniture')(state),
-	query: getRouterQuery(state)
+	query: getRouterQuery(state),
+	userData: getUserData(state)
 });
 
 const mapDispatchToProps = {
@@ -29,32 +32,27 @@ const COLUMNS = [
 	{
 		field: 'Name',
 		header: 'Name',
-		sortable: true,
-		filter: true
+		sortable: true
 	},
 	{
 		field: 'Theme',
 		header: 'Theme',
-		sortable: true,
-		filter: true
+		sortable: true
 	},
 	{
 		field: 'Style',
 		header: 'Style',
-		sortable: true,
-		filter: true
+		sortable: true
 	},
 	{
 		field: 'Color',
 		header: 'Color',
-		sortable: true,
-		filter: true
+		sortable: true
 	},
 	{
 		field: 'Source',
 		header: 'Source',
-		sortable: true,
-		filter: true
+		sortable: true
 	},
 	{
 		field: 'Price',
@@ -69,12 +67,14 @@ const FurnitureViewComponent = ({
 	isLoggedIn,
 	userFurniture,
 	addCatalogFurnitureRecord,
-	removeCatalogFurnitureRecord
+	removeCatalogFurnitureRecord,
+	userData
 }: Props) => {
 	let title = 'List of Furniture';
 
 	return (
 		<ListView
+			userData={userData}
 			data={Furnitures}
 			userRecords={userFurniture}
 			addRecord={(record) => (isLoggedIn ? addCatalogFurnitureRecord('Furniture', record) : null)}

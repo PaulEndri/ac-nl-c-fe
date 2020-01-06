@@ -1,9 +1,10 @@
 import React from 'react';
 import { Projects } from 'ac-nl-sdk';
-import { getUserLoggedInStatus, getUserProjects } from '../../store/user/selectors';
+import { getUserLoggedInStatus, getUserProjects, getUserData } from '../../store/user/selectors';
 import { connect } from 'react-redux';
 import { addUserProjects, removeUserProjects } from '../../store/user/actions';
 import ListView from '../../components/listView';
+import { IPlayer } from '../../lambdas/app/interfaces/IPlayer';
 
 interface Props {
 	userProjects?: string[];
@@ -11,11 +12,13 @@ interface Props {
 	addUserProjects: Function;
 	removeUserProjects: Function;
 	query: any;
+	userData: IPlayer;
 }
 
 const mapStateToProps = (state) => ({
 	isLoggedIn: getUserLoggedInStatus(state),
-	userProjects: getUserProjects(state)
+	userProjects: getUserProjects(state),
+	userData: getUserData(state)
 });
 
 const mapDispatchToProps = {
@@ -64,11 +67,12 @@ const COLUMNS = [
 	}
 ];
 
-const ProjectsViewComponent = ({ isLoggedIn, userProjects, removeUserProjects, addUserProjects }: Props) => {
+const ProjectsViewComponent = ({ userData, isLoggedIn, userProjects, removeUserProjects, addUserProjects }: Props) => {
 	let title = 'List of Public Works';
 
 	return (
 		<ListView
+			userData={userData}
 			data={Projects}
 			userRecords={userProjects}
 			addRecord={(record) => (isLoggedIn ? addUserProjects(record) : null)}

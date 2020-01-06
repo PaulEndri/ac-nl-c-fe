@@ -1,10 +1,11 @@
 import React from 'react';
 import { Wallpapers } from 'ac-nl-sdk';
-import { getUserLoggedInStatus, getUserFurniture } from '../../store/user/selectors';
+import { getUserLoggedInStatus, getUserFurniture, getUserData } from '../../store/user/selectors';
 import { connect } from 'react-redux';
 import { addCatalogFurnitureRecord, removeCatalogFurnitureRecord } from '../../store/user/actions';
 import ListView from '../../components/listView';
 import { getRouterQuery } from '../../store/router/selector';
+import { IPlayer } from '../../lambdas/app/interfaces/IPlayer';
 
 interface Props {
 	userFurniture?: string[];
@@ -12,12 +13,14 @@ interface Props {
 	addCatalogFurnitureRecord: Function;
 	removeCatalogFurnitureRecord: Function;
 	query: any;
+	userData: IPlayer;
 }
 
 const mapStateToProps = (state) => ({
 	isLoggedIn: getUserLoggedInStatus(state),
 	userFurniture: getUserFurniture('Wallpapers')(state),
-	query: getRouterQuery(state)
+	query: getRouterQuery(state),
+	userData: getUserData(state)
 });
 
 const mapDispatchToProps = {
@@ -68,6 +71,7 @@ const COLUMNS = [
 const WallpaperViewComponent = ({
 	isLoggedIn,
 	userFurniture,
+	userData,
 	addCatalogFurnitureRecord,
 	removeCatalogFurnitureRecord
 }: Props) => {
@@ -75,6 +79,7 @@ const WallpaperViewComponent = ({
 
 	return (
 		<ListView
+			userData={userData}
 			data={Wallpapers}
 			userRecords={userFurniture}
 			addRecord={(record) => (isLoggedIn ? addCatalogFurnitureRecord('Wallpapers', record) : null)}

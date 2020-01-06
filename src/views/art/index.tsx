@@ -1,20 +1,23 @@
 import React from 'react';
 import { Art } from 'ac-nl-sdk';
-import { getUserArt, getUserLoggedInStatus } from '../../store/user/selectors';
+import { getUserArt, getUserLoggedInStatus, getUserData } from '../../store/user/selectors';
 import { connect } from 'react-redux';
 import { addMuseumRecord, removeMuseumRecord } from '../../store/user/actions';
 import ListView from '../../components/listView';
+import { IPlayer } from '../../lambdas/app/interfaces/IPlayer';
 
 interface Props {
 	isLoggedIn: boolean;
 	userArt?: string[];
+	userData: IPlayer;
 	addMuseumRecord: Function;
 	removeMuseumRecord: Function;
 }
 
 const mapStateToProps = (state) => ({
 	isLoggedIn: getUserLoggedInStatus(state),
-	userArt: getUserArt(state)
+	userArt: getUserArt(state),
+	userData: getUserData(state)
 });
 
 const mapDispatchToProps = {
@@ -36,9 +39,10 @@ const COLUMNS = [
 		excludeGlobalFilter: true
 	}
 ];
-const ArtViewComponent = ({ userArt, addMuseumRecord, removeMuseumRecord, isLoggedIn }: Props) => {
+const ArtViewComponent = ({ userArt, userData, addMuseumRecord, removeMuseumRecord, isLoggedIn }: Props) => {
 	return (
 		<ListView
+			userData={userData}
 			data={Art}
 			userRecords={userArt}
 			addRecord={(data) => (isLoggedIn ? addMuseumRecord('Art', data) : null)}
