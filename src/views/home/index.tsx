@@ -65,7 +65,7 @@ const Dashboard = ({ date, setModal, userData }: DashboardProps) => {
 	return (
 		<div className="p-grid p-justify-even">
 			<div className="p-col-12 p-md-3 p-lg-3">
-				<div className="p-grid ">
+				<div className="p-grid" style={{ padding: '7px' }}>
 					<Panel header="Today's Birthdays" className={cardClasses}>
 						<Feed>
 							{Villagers.map((f, i) => (
