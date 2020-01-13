@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Villagers, IVillager } from 'ac-nl-sdk';
-import EntityListView from '../../components/entityList';
+import EntityListView from '../../components/entityListView';
 import { Panel } from 'primereact/components/panel/Panel';
 import { MODAL_OPTIONS } from '../../store/modals/reducer';
 import { Dropdown } from 'primereact/dropdown';

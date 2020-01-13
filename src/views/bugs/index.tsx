@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Bugs, IBug } from 'ac-nl-sdk';
-import EntityListView from '../../components/entityList';
+import EntityListView from '../../components/entityListView';
 import { MODAL_OPTIONS } from '../../store/modals/reducer';
 import { Panel } from 'primereact/components/panel/Panel';
 import { Dropdown } from 'primereact/dropdown';

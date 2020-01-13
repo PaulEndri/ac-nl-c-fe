@@ -41,6 +41,17 @@ const Layout: React.FC<LayoutProps> = ({ children, menuState, isLoggedIn, setMen
 	};
 	let menuData = createMenu(push);
 
+	if (isLoggedIn) {
+		menuData[0].command = null;
+		menuData[0].items = [
+			{ label: 'Home', command: () => push('/') },
+			{
+				label: 'My Town',
+				command: () => push('/town')
+			}
+		];
+	}
+
 	return (
 		<div className={classNames('layout-wrapper layout-static', { 'layout-mobile-active': IS_MOBILE && menuState })}>
 			<div>
